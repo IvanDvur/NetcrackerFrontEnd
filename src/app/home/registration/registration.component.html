@@ -1,0 +1,31 @@
+<div class="modal" tabindex="-1" role="dialog">
+  <meta charset="UTF-8">
+
+  <div class="modal-content">
+    <div class="modal-header">
+      <label class="modal-title">Регистрация</label>
+      <button class="btn-close" mat-dialog-close (click)="onCloseClick()">
+        x
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="username">Логин</label>
+          <input type="text" class="form-control" id="username">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email">
+        </div>
+        <div class="form-group">
+          <label for="password">Пароль</label>
+          <input type="password" class="form-control" id="password">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn-register">Регистрация</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<label class="topic">Создать SMS рассылку</label>
+<div class="box">
+  <label>1. Добавьте текст сообщения</label>
+</div>
+<textarea id="text" ></textarea>
+<div class="box">
+  <label>2. Выберите дату отправки</label>
+</div>
+<div class="box">
+  <mat-checkbox [(ngModel)]="startImmediately"  (change)="handleCheckboxChange('startImmediately')">Начать рассылку сразу</mat-checkbox>
+</div>
+<div class="box">
+  <mat-checkbox [(ngModel)]="chooseDate"  (change)="handleCheckboxChange('chooseDate')">Выбор дат</mat-checkbox>
+</div>
+<div class="box">
+  <mat-checkbox [(ngModel)]="dateInterval"  (change)="handleCheckboxChange('dateInterval')">Интервал дат</mat-checkbox>
+</div>
+<div id="SelectData" class="box" [style.display]="selectDataVisible ? 'block' : 'none'">
+  <mat-form-field>
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>
+<div id="SelectDataRange" class="box"  [style.display]="selectDataRangeVisible ? 'block' : 'none'">
+  <mat-form-field>
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [rangePicker]="pickerRange">
+      <input matStartDate placeholder="Start date">
+      <input matEndDate placeholder="End date">
+    </mat-date-range-input>
+    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="pickerRange"></mat-datepicker-toggle>
+    <mat-date-range-picker #pickerRange></mat-date-range-picker>
+  </mat-form-field>
+</div>
+<button class="button" (click)="Send()">Создать рассылку</button>
