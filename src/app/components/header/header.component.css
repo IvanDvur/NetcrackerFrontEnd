@@ -22,37 +22,8 @@
   margin-left: 10px;
   transition: background-color 0.3s, color 0.3s;
 }
-.register-button {
-  flex-wrap: wrap;
-  background-color: #ed3e3e;
-  color: #ffffff;
-}
-.login-button {
-  flex-wrap: wrap;
-  background-color: #1e65c8;
-  color: #ffffff;
-}
-img {
-  width: 350px;
-  height: 350px;
-}
-.imgSmall{
-  width: 200px;
-  height: 200px;
-}
-.register-button:hover {
-  flex-wrap: wrap;
-  background-color: #ff4b4b;
-  color: #fff;
-}
-.login-button:hover {
-  flex-wrap: wrap;
-  background-color: #256ed3;
-  color: #fff;
-}
 
-header {
-
+.generalHeader {
   flex-wrap: wrap;
   transition: all 0.3s ease-in-out;
   position: fixed;

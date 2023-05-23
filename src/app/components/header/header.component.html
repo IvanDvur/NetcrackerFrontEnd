@@ -1,0 +1,17 @@
+<div >
+  <div class="generalHeader" [class.scroll]="isScrolled">
+    <div class="name" >
+      <img class="logo" src="../assets/logo.png" alt="Лого">
+      <a class="name" href="/home">Sender</a>
+    </div>
+    <div class="auth-buttons" *ngIf="!isAuthorized">
+      <a routerLink="/login">
+        <button class="btn btn-success">Вход</button>
+      </a>
+      <button routerLink="/register" class="btn btn-danger"  >Регистрация</button>
+    </div>
+    <div class="auth-buttons" *ngIf="isAuthorized">
+      <button (click)="logout()" class="btn btn-danger">Выйти</button>
+    </div>
+  </div>
+</div>

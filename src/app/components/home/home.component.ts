@@ -1,7 +1,5 @@
 import {Component, HostListener} from '@angular/core';
 import { MatDialog} from "@angular/material/dialog";
-import { RegistrationComponent } from './registration/registration.component';
-
 import {Router} from "@angular/router";
 
 @Component({
@@ -12,14 +10,6 @@ import {Router} from "@angular/router";
 export class HomeComponent {
 
   constructor(private dialog: MatDialog,private router: Router) {}
-
-
-  openRegistrationDialog() {
-    this.dialog.open(RegistrationComponent);
-
-  }
-
-
 
 
 }

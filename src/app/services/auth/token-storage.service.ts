@@ -18,7 +18,12 @@ export class TokenStorageService {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY,token);
   }
+
   public getToken():string|null{
     return sessionStorage.getItem(TOKEN_KEY);
+  }
+
+  public isAuthorized():boolean{
+    return sessionStorage.getItem(TOKEN_KEY)!=null;
   }
 }

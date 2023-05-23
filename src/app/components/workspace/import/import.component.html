@@ -10,25 +10,20 @@
         <input type="text" aria-describedby="name-help" class="p-inputtext w-1/2" id="name" formControlName="name"/>
         <small id="name-help">Назовите свой список</small>
       </div>
-
-      <p-fileUpload (onUpload)="onClickSubmit()"
-                    (onSelect)="selectFile($event)"
-                    [auto]="false"
-                    [multiple]="false"
-                    accept=".csv">
-        <ng-template pTemplate="content">
-        </ng-template>
-      </p-fileUpload >
-
-      <div class="mb-5 mt-5">
+<!--      <p-fileUpload (onUpload)="onClickSubmit()"-->
+<!--                    (onSelect)="selectFile($event)"-->
+<!--                    [auto]="false"-->
+<!--                    [multiple]="false"-->
+<!--                    accept=".csv" class="m-3">-->
+<!--        <ng-template pTemplate="content">-->
+<!--        </ng-template>-->
+<!--      </p-fileUpload >-->
+      <div class="m-3">
         <input type="file" class="p-fileupload" (change)="selectFile($event)" accept=".csv"
                formControlName="file">
       </div>
       <div>
         <p-button class="p-button-success m-3" (click)="onClickSubmit()">Создать</p-button>
-      </div>
-      <div>
-        <p-button class="p-button-success m-3" (click)="check()">Проверить</p-button>
       </div>
     </ng-container>
   </div>

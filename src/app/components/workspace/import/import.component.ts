@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ImportService} from "../../services/import/import.service";
+import {ImportService} from "../../../services/import/import.service";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {TokenStorageService} from "../../services/auth/token-storage.service";
+import {TokenStorageService} from "../../../services/auth/token-storage.service";
 
 
 @Component({

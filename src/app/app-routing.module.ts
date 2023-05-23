@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {HomeComponent} from "./home/home.component";
-import {WorkspaceComponent} from "./workspace/workspace.component";
-import {ContactsComponent} from "./workspace/contacts/contacts.component";
-import {ImportComponent} from "./workspace/import/import.component";
-import {CreateOrderComponent} from "./workspace/create-order/create-order.component";
-import {LoginComponent} from "./login/login.component";
+import {HomeComponent} from "./components/home/home.component";
+import {WorkspaceComponent} from "./components/workspace/workspace.component";
+import {ContactsComponent} from "./components/workspace/contacts/contacts.component";
+import {ImportComponent} from "./components/workspace/import/import.component";
+import {CreateOrderComponent} from "./components/workspace/create-order/create-order.component";
+import {LoginComponent} from "./components/login/login.component";
+import {RegistrationComponent} from "./components/registration/registration.component";
+import {NotFoundComponent} from "./components/not-found/not-found.component";
 
 const routes: Routes = [
   {path: '',redirectTo: 'home',pathMatch:'full'},
@@ -20,8 +22,9 @@ const routes: Routes = [
 
     ]
   },
-  {path:'login',component:LoginComponent}
-
+  {path:'login',component:LoginComponent},
+  {path:'register',component:RegistrationComponent},
+  {path: '**', component: NotFoundComponent},
 ];
 
 @NgModule({

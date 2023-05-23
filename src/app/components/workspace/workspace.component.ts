@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import jwt_decode from 'jwt-decode';
-import {TokenStorageService} from "../services/auth/token-storage.service";
+import {TokenStorageService} from "../../services/auth/token-storage.service";
 import {Router} from "@angular/router";
 
 @Component({

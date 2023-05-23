@@ -1,8 +1,8 @@
  import { Component } from '@angular/core';
- import {TokenStorageService} from "../services/auth/token-storage.service";
- import {AuthService} from "../services/auth/auth.service";
+ import {TokenStorageService} from "../../services/auth/token-storage.service";
+ import {AuthService} from "../../services/auth/auth.service";
  import {FormBuilder} from "@angular/forms";
- import {AuthLoginInfo} from "../services/auth/login-info";
+ import {AuthLoginInfo} from "../../services/auth/login-info";
  import {Router} from "@angular/router";
  import jwt_decode from "jwt-decode";
 
@@ -30,19 +30,17 @@ export class LoginComponent {
       this.checkoutForm.value.username||'',
       this.checkoutForm.value.password||'');
 
-
     this.authService.attempAuth(this.loginInfo).subscribe(
       data=>{
         console.log(data.token)
         this.tokenStorage.saveToken(data.token)
-
         this.router.navigate(['/workspace']);
       }
     )
-
   }
 
 
-
-
+  redirectToRegistration() {
+    this.router.navigate(['/register'])
+  }
 }
