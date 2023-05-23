@@ -1,0 +1,14 @@
+<div *ngIf="showHeader">
+  <header [class.scroll]="isScrolled">
+    <div class="name" >
+      <img class="logo" src="../assets/logo.png" alt="Лого">
+      <a class="name" href="/home">Sender</a>
+    </div>
+    <div class="auth-buttons">
+      <a href="/src/app/login">
+        <button class="login-button">Вход</button>
+      </a>
+      <button  class="register-button"  >Регистрация</button>
+    </div>
+  </header>
+</div>
