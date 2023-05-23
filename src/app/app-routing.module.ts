@@ -5,6 +5,7 @@ import {WorkspaceComponent} from "./workspace/workspace.component";
 import {ContactsComponent} from "./workspace/contacts/contacts.component";
 import {ImportComponent} from "./workspace/import/import.component";
 import {CreateOrderComponent} from "./workspace/create-order/create-order.component";
+import {LoginComponent} from "./login/login.component";
 
 const routes: Routes = [
   {path: '',redirectTo: 'home',pathMatch:'full'},
@@ -16,8 +17,10 @@ const routes: Routes = [
       { path: 'import', component: ImportComponent },
       { path: 'contacts', component: ContactsComponent },
       { path: 'create-order', component: CreateOrderComponent},
+
     ]
   },
+  {path:'login',component:LoginComponent}
 
 ];
 

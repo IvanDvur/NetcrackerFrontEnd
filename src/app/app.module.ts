@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
 import { HomeComponent } from './home/home.component';
 import { RegistrationComponent } from './home/registration/registration.component';
-import { AuthorizationComponent } from './home/authorization/authorization.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
@@ -30,6 +30,9 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {FileUploadModule} from "primeng/fileupload";
+import { LoginComponent } from './login/login.component';
+import {httpIterseptorProviders} from "./services/auth/auth-interseptor";
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -38,11 +41,13 @@ import {FileUploadModule} from "primeng/fileupload";
     AppComponent,
     HomeComponent,
     RegistrationComponent,
-    AuthorizationComponent,
+
     SidebarComponent,
     ImportComponent,
     CreateOrderComponent,
-    ContactsComponent
+    ContactsComponent,
+    LoginComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +73,7 @@ import {FileUploadModule} from "primeng/fileupload";
     MatCheckboxModule,
     FileUploadModule
   ],
-  providers: [],
+  providers: [httpIterseptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ImportService} from "../services/import.service";
+import {ImportService} from "../../services/import/import.service";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {TokenStorageService} from "../../services/auth/token-storage.service";
 
 
 @Component({
@@ -14,7 +15,7 @@ export class ImportComponent implements OnInit {
   private selectedFiles?: FileList;
   private currentFile?: File;
 
-  constructor(private service: ImportService, private readonly formBuilder: FormBuilder) {
+  constructor(private service: ImportService, private readonly formBuilder: FormBuilder,private token:TokenStorageService) {
     this.myFormGroup = this.formBuilder.group({name: [], file: []});
   }
 
@@ -50,7 +51,7 @@ export class ImportComponent implements OnInit {
       this.currentFile = file;
       this.service.upload(this.myFormGroup.getRawValue(),this.currentFile)
         .subscribe((): void => {
-          alert('Saved!');
+          console.log("saved")
         });
       console.log(this.currentFile)
     }
@@ -58,4 +59,7 @@ export class ImportComponent implements OnInit {
   }
 
 
+  check() {
+  console.log(this.token.getToken())
+  }
 }
