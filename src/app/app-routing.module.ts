@@ -9,12 +9,15 @@ import {LoginComponent} from "./components/login/login.component";
 import {RegistrationComponent} from "./components/registration/registration.component";
 import {NotFoundComponent} from "./components/not-found/not-found.component";
 
+import {canActivate, canActivateChild} from "./auth.guardTest";
+
 const routes: Routes = [
   {path: '',redirectTo: 'home',pathMatch:'full'},
   {path: 'home', component: HomeComponent},
   {
     path: 'workspace',
-    component: WorkspaceComponent,
+    component: WorkspaceComponent,canActivate:[canActivate],
+    canActivateChild:[canActivateChild],
     children: [
       { path: 'import', component: ImportComponent },
       { path: 'contacts', component: ContactsComponent },
@@ -24,7 +27,8 @@ const routes: Routes = [
   },
   {path:'login',component:LoginComponent},
   {path:'register',component:RegistrationComponent},
-  {path: '**', component: NotFoundComponent},
+  {path:'error',component:NotFoundComponent},
+  {path: '**', redirectTo:'/error'},
 ];
 
 @NgModule({

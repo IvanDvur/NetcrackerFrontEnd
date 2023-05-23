@@ -10,8 +10,15 @@
       </a>
       <button routerLink="/register" class="btn btn-danger"  >Регистрация</button>
     </div>
-    <div class="auth-buttons" *ngIf="isAuthorized">
-      <button (click)="logout()" class="btn btn-danger">Выйти</button>
+    <div  *ngIf="isAuthorized">
+      <div class="auth-buttons" >
+        <span class="text-white ">
+          {{username}}
+     </span>
+        <button (click)="logout()" class="btn btn-danger">Выйти</button>
+      </div>
     </div>
+
   </div>
 </div>
+
