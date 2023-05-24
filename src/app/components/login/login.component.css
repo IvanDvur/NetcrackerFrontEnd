@@ -8,3 +8,15 @@
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(to right, rgba(48,106,161,1), rgba(37, 117, 252, 1))
 }
+input{
+  &.ng-invalid.ng-touched{
+  border:2px solid red;
+   }
+  &.ng-valid.ng-touched{
+   border:2px solid green;
+ }
+}
+
+.validation{
+  color:red
+}

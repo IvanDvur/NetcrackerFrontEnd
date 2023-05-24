@@ -12,14 +12,27 @@
                   <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
                          formControlName="username">
                   <label for="floatingInput">Адрес электронной почты</label>
+                  <div class ="validation" *ngIf="checkoutForm.get('username')!.invalid &&checkoutForm.get('username')!.touched">
+                    <small *ngIf ="checkoutForm.get('username')!.errors?.['required']" >
+                      Поле Email не может быть пустым
+                    </small>
+                  </div>
                 </div>
                 <div class="form-floating form-white mb-4">
                   <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
                          formControlName="password">
                   <label for="floatingPassword">Пароль</label>
+
+                  <div class="validation" *ngIf="checkoutForm.get('password')!.invalid &&checkoutForm.get('password')!.touched">
+                    <small *ngIf ="checkoutForm.get('password')!.errors?.['required']">Пароль не может быть пустым</small>
+                    <small *ngIf ="checkoutForm.get('password')!.errors?.['minlength']">
+                      Длина должна быть не менее {{checkoutForm.get('password')!.errors?.['minlength'].requiredLength}}.
+                      Сейчас колличество символов {{checkoutForm.get('password')!.errors?.['minlength'].actualLength}}
+                    </small>
+                  </div>
                 </div>
                 <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Забыли пароль?</a></p>
-                <button class="btn btn-outline-light btn-lg px-5" type="submit">Войти</button>
+                <button class="btn btn-outline-light btn-lg px-5" type="submit"  [disabled]="checkoutForm.invalid" >Войти</button>
               </form>
             </div>
             <div>
