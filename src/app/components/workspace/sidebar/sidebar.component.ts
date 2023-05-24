@@ -19,17 +19,17 @@ export class SidebarComponent implements OnInit {
         items: [
           {
             label: 'Импортировать клиентскую базу',
-            icon: 'pi pi-fw pi-plus',
+            icon: 'pi pi-fw pi-file-import',
             routerLink:'/workspace/import',
           },
           {
             label: 'Списки клиентов',
-            icon: 'pi pi-fw pi-trash',
+            icon: 'pi pi-fw pi-book',
             routerLink: '/workspace/contacts'
           },
           {
             label: 'Создать заявку на рассылку',
-            icon: 'pi pi-fw pi-trash',
+            icon: 'pi pi-fw pi-envelope',
             routerLink: '/workspace/create-order'
           },
         ]

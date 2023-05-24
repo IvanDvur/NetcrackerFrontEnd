@@ -36,6 +36,12 @@ import { HeaderComponent } from './components/header/header.component';
 import {CommonModule} from "@angular/common";
 import {RegistrationComponent} from "./components/registration/registration.component";
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import {TableModule} from "primeng/table";
+import {TagModule} from "primeng/tag";
+import {DropdownModule} from "primeng/dropdown";
+import {MultiSelectModule} from "primeng/multiselect";
+import {SliderModule} from "primeng/slider";
+import {InputTextModule} from "primeng/inputtext";
 
 
 @NgModule({
@@ -75,7 +81,13 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MatMomentDateModule,
     MatCheckboxModule,
     FileUploadModule,
-    CommonModule
+    CommonModule,
+    TableModule,
+    TagModule,
+    DropdownModule,
+    MultiSelectModule,
+    SliderModule,
+    InputTextModule
   ],
   providers: [httpIterseptorProviders],
   bootstrap: [AppComponent]
