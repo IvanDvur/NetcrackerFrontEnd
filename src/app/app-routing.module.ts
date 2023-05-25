@@ -22,7 +22,6 @@ const routes: Routes = [
       { path: 'import', component: ImportComponent },
       { path: 'contacts', component: ContactsComponent },
       { path: 'create-order', component: CreateOrderComponent},
-
     ]
   },
   {path:'login',component:LoginComponent},
