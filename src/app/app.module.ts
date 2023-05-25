@@ -36,7 +36,9 @@ import { HeaderComponent } from './components/header/header.component';
 import {CommonModule} from "@angular/common";
 import {RegistrationComponent} from "./components/registration/registration.component";
 import { NotFoundComponent } from './components/not-found/not-found.component';
-
+import {MatStepperModule} from '@angular/material/stepper';
+import {InputTextModule} from "primeng/inputtext";
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -63,6 +65,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     SlideMenuModule,
     MenuModule,
     MatIconModule,
+    MatStepperModule,
     MatToolbarModule,
     MatListModule,
     MatSidenavModule,
@@ -75,7 +78,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MatMomentDateModule,
     MatCheckboxModule,
     FileUploadModule,
-    CommonModule
+    CommonModule,
+    InputTextModule,
+    MatRadioModule
   ],
   providers: [httpIterseptorProviders],
   bootstrap: [AppComponent]

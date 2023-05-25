@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
+import {FormBuilder} from "@angular/forms";
+import {MatStepper} from "@angular/material/stepper";
+
 
 @Component({
   selector: 'app-create-order',
@@ -7,64 +10,65 @@ import { Component } from '@angular/core';
 })
 export class CreateOrderComponent {
 
-  startImmediately = false;
-  chooseDate = false;
-  dateInterval = false;
-  selectDataVisible = false;
-  selectDataRangeVisible = false;
+
+  isEditable = false;
+
+  constructor(private _formBuilder: FormBuilder) {}
+
+  selectDataVisible: boolean;
   text!: string;
   selectedDate!: Date;
-  selectedFile!: File;
-  handleCheckboxChange(checkbox: string) {
-    if (checkbox == 'startImmediately') {
 
-      this.chooseDate = false;
-      this.dateInterval = false;
-      this.selectDataVisible = false;
-      this.selectDataRangeVisible = false;
-    } else if (checkbox == 'chooseDate') {
-      this.startImmediately = false;
-      this.dateInterval = false;
+  emailStepperV: boolean=false;
+  smsStepperV: boolean=false;
+  StartVisible:boolean=true;
+  btnExVisible:boolean=false;
+
+
+  startChoose: any;
+  chooseTime: any;
+  private CdkStepperr: any;
+
+
+  onChooseDate(event: Event) {
       this.selectDataVisible = true;
-      this.selectDataRangeVisible = false;
-    } else if (checkbox == 'dateInterval') {
-      this.startImmediately = false;
-      this.chooseDate = false;
-      this.selectDataVisible = false;
-      this.selectDataRangeVisible = true;
     }
-  }
-  selectFile() {
-    const fileInput = document.getElementById('fileInput');
-    if (fileInput) {
-      fileInput.click();
-    }
-  }
 
-  ChangeInput(event: any) {
-    this.selectedFile = event.target.files[0];
-    //тут действия с файлом
-  }
 
-  onFileDropped(event: any) {
-    event.preventDefault();
-    this.selectedFile = event.dataTransfer.files[0];
-    // действия с файлом
-    console.log('Файл загружен:', this.selectedFile);
-  }
-
-  onDragOver(event: any) {
-    event.preventDefault();
-    console.log('Файл над зоной');
-  }
-
-  onDragLeave(event: any) {
-    event.preventDefault();
-  }
-
-  Send()
+  onStartImme(event: Event)
   {
+      this.selectDataVisible = false;
+    }
 
+
+
+  start()
+  {
+    if(this.startChoose=="sms")
+    {
+      this.StartVisible=false;
+      this.smsStepperV = true;
+      this.btnExVisible=true;
+
+    }
+      if(this.startChoose=="email")
+      {
+        this.StartVisible=false;
+        this.emailStepperV = true;
+        this.btnExVisible=true;
+      }
+  }
+
+  @ViewChild('emailStepper') email!: MatStepper;
+  @ViewChild('smsStepper') sms!: MatStepper;
+  restart(stepper1: MatStepper,stepper2: MatStepper)
+  {
+    stepper1.reset()
+    stepper2.reset()
+    this.StartVisible=true;
+    this.smsStepperV = false;
+    this.btnExVisible=false;
+    this.emailStepperV = false;
   }
 
 }

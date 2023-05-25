@@ -2,6 +2,7 @@
 @import "primeng/resources/primeng.css";
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+@import "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,3 +11,64 @@ body { margin: 0;  background-color: #ebecf1; font-family: Roboto, "Helvetica Ne
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color: #dd2335;
+  color: #fff;
+}
+.mat-mdc-checkbox {
+  --mdc-checkbox-disabled-selected-icon-color: rgba(0, 0, 0, 0.38);
+  --mdc-checkbox-disabled-unselected-icon-color: rgba(0, 0, 0, 0.38);
+  --mdc-checkbox-selected-checkmark-color: #fdfafa;
+  --mdc-checkbox-selected-focus-icon-color: #dd2335;
+  --mdc-checkbox-selected-hover-icon-color: #dd2335;
+  --mdc-checkbox-selected-icon-color: #dd2335;
+  --mdc-checkbox-selected-pressed-icon-color: #dd2335;
+  --mdc-checkbox-unselected-focus-icon-color: #212121;
+  --mdc-checkbox-unselected-hover-icon-color: #212121;
+  --mdc-checkbox-unselected-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-checkbox-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-checkbox-selected-focus-state-layer-color: #dd2335;
+  --mdc-checkbox-selected-hover-state-layer-color: #dd2335;
+  --mdc-checkbox-selected-pressed-state-layer-color: #dd2335;
+  --mdc-checkbox-unselected-focus-state-layer-color: black;
+  --mdc-checkbox-unselected-hover-state-layer-color: black;
+  --mdc-checkbox-unselected-pressed-state-layer-color: black;
+}
+.mat-stepper-horizontal, .mat-stepper-vertical {
+  background-color: #ebecf1;
+}
+.mdc-text-field .mdc-text-field__input {
+  caret-color: #ed3e3e;
+}
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: rgb(237 62 62);
+}
+
+.mdc-text-field--filled .mdc-line-ripple::after {
+  border-bottom-color: #ed3e3e;
+}
+.mat-datepicker-toggle-active {
+  color: #ed3e3e;
+}
+.mat-calendar-body-selected {
+  background-color: #ed3e3e;
+  color: #fff;
+}
+
+  .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover>.mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+    background-color: rgb(237 62 62 / 60%);
+  }
+.mat-mdc-radio-button.mat-accent {
+  --mdc-radio-disabled-selected-icon-color: #000;
+  --mdc-radio-disabled-unselected-icon-color: #000;
+  --mdc-radio-unselected-hover-icon-color: #212121;
+  --mdc-radio-unselected-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-radio-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-radio-selected-focus-icon-color: #ed3e3e;
+  --mdc-radio-selected-hover-icon-color: #ed3e3e;
+  --mdc-radio-selected-icon-color: #ed3e3e;
+  --mdc-radio-selected-pressed-icon-color: #ed3e3e;
+  --mat-radio-ripple-color: #000;
+  --mat-radio-checked-ripple-color: #ed3e3e;
+  --mat-radio-disabled-label-color: rgba(0, 0, 0, 0.38);
+}
