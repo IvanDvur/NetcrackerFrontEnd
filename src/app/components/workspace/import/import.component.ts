@@ -25,21 +25,6 @@ export class ImportComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  ChangeInput(event: any) {
-    //тут действия с файлом
-  }
-
-  onFileDropped(event: any) {
-
-  }
-
-  onDragOver(event: any) {
-
-  }
-
-  onDragLeave(event: any) {
-
-  }
 
   public onClickSubmit(): void {
     if (this.myFormGroup.invalid || this.selectedFiles?.item(0)==null) {

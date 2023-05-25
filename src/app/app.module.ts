@@ -44,6 +44,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {MultiSelectModule} from "primeng/multiselect";
 import {SliderModule} from "primeng/slider";
 import {InputTextModule} from "primeng/inputtext";
+import {RippleModule} from "primeng/ripple";
 
 
 
@@ -61,40 +62,41 @@ import {InputTextModule} from "primeng/inputtext";
     RegistrationComponent,
     NotFoundComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    MatDialogModule,
-    SidebarModule,
-    ButtonModule,
-    SlideMenuModule,
-    MenuModule,
-    MatIconModule,
-    MatStepperModule,
-    MatToolbarModule,
-    MatListModule,
-    MatSidenavModule,
-    PanelMenuModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    MatDialogModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatMomentDateModule,
-    MatCheckboxModule,
-    FileUploadModule,
-    CommonModule,
-    MatRadioModule
-    TableModule,
-    TagModule,
-    DropdownModule,
-    MultiSelectModule,
-    SliderModule,
-    InputTextModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        MatDialogModule,
+        SidebarModule,
+        ButtonModule,
+        SlideMenuModule,
+        MenuModule,
+        MatIconModule,
+        MatStepperModule,
+        MatToolbarModule,
+        MatListModule,
+        MatSidenavModule,
+        PanelMenuModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatMomentDateModule,
+        MatCheckboxModule,
+        FileUploadModule,
+        CommonModule,
+        MatRadioModule,
+        TableModule,
+        TagModule,
+        DropdownModule,
+        MultiSelectModule,
+        SliderModule,
+        InputTextModule,
+        RippleModule
 
-  ],
+    ],
   providers: [httpIterseptorProviders],
   bootstrap: [AppComponent]
 })

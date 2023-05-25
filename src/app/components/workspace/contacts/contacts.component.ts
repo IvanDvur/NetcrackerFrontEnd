@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {CustomerService} from "./customerservice";
-import {Customer, Representative} from "./customer";
+import {Component, OnInit} from '@angular/core';
+import {MailingList} from "./mailingList";
 import {Table} from "primeng/table";
+import {ContactsService} from "../../../services/customer/contacts.service";
 
 
 @Component({
@@ -13,48 +13,28 @@ import {Table} from "primeng/table";
 
 export class ContactsComponent {
 
-  customers: Customer[];
+  mailingLists: MailingList[];
 
-  representatives: Representative[];
 
-  statuses: any[];
-
-  loading: boolean = true;
-
-  activityValues: number[] = [0, 100];
-
-  constructor(private customerService: CustomerService) {
+  constructor(private contactsService: ContactsService) {
   }
 
   ngOnInit() {
-    this.customerService.getCustomersLarge().then((customers) => {
-      this.customers = customers;
-      this.loading = false;
+    this.fetchMailingLists()
+    console.log(this.mailingLists)
+  }
 
-      this.customers.forEach((customer) => (customer.date = new Date(customer.date!)));
+  fetchMailingLists() {
+    this.contactsService.fetch().subscribe(data => {
+      this.mailingLists = data
+      console.log(data);
     });
+  }
 
-    this.representatives = [
-      {name: 'Amy Elsner', image: 'amyelsner.png'},
-      {name: 'Anna Fali', image: 'annafali.png'},
-      {name: 'Asiya Javayant', image: 'asiyajavayant.png'},
-      {name: 'Bernardo Dominic', image: 'bernardodominic.png'},
-      {name: 'Elwin Sharvill', image: 'elwinsharvill.png'},
-      {name: 'Ioni Bowcher', image: 'ionibowcher.png'},
-      {name: 'Ivan Magalhaes', image: 'ivanmagalhaes.png'},
-      {name: 'Onyama Limba', image: 'onyamalimba.png'},
-      {name: 'Stephen Shaw', image: 'stephenshaw.png'},
-      {name: 'Xuxue Feng', image: 'xuxuefeng.png'}
-    ];
-
-    this.statuses = [
-      {label: 'Unqualified', value: 'unqualified'},
-      {label: 'Qualified', value: 'qualified'},
-      {label: 'New', value: 'new'},
-      {label: 'Negotiation', value: 'negotiation'},
-      {label: 'Renewal', value: 'renewal'},
-      {label: 'Proposal', value: 'proposal'}
-    ];
+  deleteMailingList(id:string){
+    this.contactsService.delete(id).subscribe(()=>{
+      this.fetchMailingLists()
+    })
   }
 
   applyFilterGlobal(event: any) {
@@ -63,25 +43,6 @@ export class ContactsComponent {
 
   clear(table: Table) {
     table.clear();
-  }
-
-  getSeverity(status:any):any {
-    switch (status.toLowerCase()) {
-      case 'unqualified':
-        return 'danger';
-
-      case 'qualified':
-        return 'success';
-
-      case 'new':
-        return 'info';
-
-      case 'negotiation':
-        return 'warning';
-
-      case 'renewal':
-        return null;
-    }
   }
 
 }

@@ -3,15 +3,14 @@
     <!--    <h1 class="ml-2">Списки клиентов</h1>-->
     <p-table
       #dt1
-      [value]="customers"
+      [value]="mailingLists"
       dataKey="id"
       [rows]="6"
       [showCurrentPageReport]="true"
       [rowsPerPageOptions]="[4,5,6]"
-      [loading]="loading"
       [paginator]="true"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-      [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']">
+      [globalFilterFields]="['name', 'country.name', 'quantityOfClients', 'status']">
       <ng-template pTemplate="caption">
         <div class="d-flex flex-row justify-content-between">
           <div>
@@ -37,83 +36,28 @@
               <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
             </div>
           </th>
-          <th style="min-width:15rem;background-color: white">
-            <div class="flex align-items-center">
-              Country
-              <p-columnFilter type="text" field="country.name" display="menu"></p-columnFilter>
-            </div>
-          </th>
-          <th style="min-width:15rem; background-color: white">
-            <div class="flex align-items-center">
-              Agent
-              <p-columnFilter field="representative" matchMode="in" display="menu" [showMatchModes]="false"
-                              [showOperator]="false" [showAddButton]="false">
-                <ng-template pTemplate="header">
-                  <div class="px-3 pt-3 pb-0">
-                    <span class="font-bold">Agent Picker</span>
-                  </div>
-                </ng-template>
-                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                  <p-multiSelect [ngModel]="value" [options]="representatives" placeholder="Any"
-                                 (onChange)="filter($event.value)" optionLabel="name">
-                    <ng-template let-option pTemplate="item">
-                      <div class="inline-block vertical-align-middle">
-                        <img [alt]="option.label"
-                             src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ option.image }}" width="24"
-                             class="vertical-align-middle"/>
-                        <span class="ml-1 mt-1">{{ option.name }}</span>
-                      </div>
-                    </ng-template>
-                  </p-multiSelect>
-                </ng-template>
-              </p-columnFilter>
-            </div>
-          </th>
           <th style="min-width:10rem;background-color: white">
             <div class="flex align-items-center">
-              Balance
-              <p-columnFilter type="numeric" field="balance" display="menu" currency="USD"></p-columnFilter>
+              Кол-во клиентов
+              <p-columnFilter type="numeric" field="quantityOfClients" display="menu"></p-columnFilter>
             </div>
           </th>
-          <th style="min-width:10rem;background-color: white">
-            <div class="flex align-items-center">
-              Activity
-              <p-columnFilter field="activity" matchMode="between" display="menu" [showMatchModes]="false"
-                              [showOperator]="false" [showAddButton]="false">
-                <ng-template pTemplate="filter" let-filter="filterCallback">
-                  <p-slider [ngModel]="activityValues" [range]="true" (onSlideEnd)="filter($event.values)"
-                            styleClass="m-3"></p-slider>
-                  <div class="flex align-items-center px-2">
-                    <span>{{ activityValues[0] }}</span>
-                    <span>{{ activityValues[1] }}</span>
-                  </div>
-                </ng-template>
-              </p-columnFilter>
-            </div>
+          <th class="text-center" style="min-width:10rem;background-color: white;">
+            <span>Действия</span>
           </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-customer>
+      <ng-template pTemplate="body" let-mailingList>
         <tr>
           <td>
-            {{ customer.name }}
+            {{ mailingList.name }}
           </td>
           <td>
-            <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
-                 [class]="'flag flag-' + customer.country.code" style="width: 20px"/>
-            <span class="ml-1 vertical-align-middle">{{ customer.country.name }}</span>
+            {{ mailingList.quantityOfClients}}
           </td>
-          <td>
-            <img [alt]="customer.representative.name"
-                 src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ customer.representative.image }}"
-                 width="32" style="vertical-align: middle"/>
-            <span class="ml-1 vertical-align-middle">{{ customer.representative.name }}</span>
-          </td>
-          <td>
-            {{ customer.balance | currency: 'USD':'symbol' }}
-          </td>
-          <td>
-            <p-progressBar [value]="customer.activity" [showValue]="false"></p-progressBar>
+          <td class="text-center">
+            <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-c p-button-text"></p-button>
+            <p-button (onClick)="deleteMailingList(mailingList.id)" icon="pi pi-times" styleClass="p-button-rounded p-button-danger p-button-text"></p-button>
           </td>
         </tr>
       </ng-template>
