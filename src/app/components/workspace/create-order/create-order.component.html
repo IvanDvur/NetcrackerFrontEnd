@@ -106,6 +106,14 @@
     <div class="btn-step">
       <button class="button" matStepperPrevious>Назад</button>
       <button class="button" matStepperNext>Дальше</button>
+
+    </div>
+    <div class="container">
+      <p-button class="p-button-success" (click)="exportHtml()">Экспортировать</p-button>
+      <email-editor minHeight="650px"
+        (loaded)="editorLoaded($event)"
+        (ready)="editorReady($event)"
+      ></email-editor>
     </div>
   </mat-step>
 

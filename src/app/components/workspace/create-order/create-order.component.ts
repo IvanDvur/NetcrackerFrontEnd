@@ -1,7 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import {FormBuilder} from "@angular/forms";
 import {MatStepper} from "@angular/material/stepper";
-
+import {EmailEditorComponent} from "../../../../../projects/email-editor/src/lib/email-editor.component";
+import sampleTamplate from './src.json'
 
 @Component({
   selector: 'app-create-order',
@@ -29,6 +30,27 @@ export class CreateOrderComponent {
   chooseTime: any;
   private CdkStepperr: any;
 
+  @ViewChild(EmailEditorComponent)
+  private emailEditor: EmailEditorComponent;
+
+  // called when the editor is created
+  editorLoaded(event:any) {
+    console.log('editorLoaded');
+    this.emailEditor.editor.loadDesign(sampleTamplate);
+    // load the design json here
+    // this.emailEditor.editor.loadDesign({});
+  }
+
+  // called when the editor has finished loading
+  editorReady(event:any) {
+    console.log('editorReady');
+  }
+
+  exportHtml() {
+    this.emailEditor.editor.exportHtml((data) =>
+      console.log('exportHtml', data)
+    );
+  }
 
   onChooseDate(event: Event) {
       this.selectDataVisible = true;
