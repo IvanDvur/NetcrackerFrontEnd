@@ -39,7 +39,7 @@ export class RegistrationComponent implements OnInit{
       data=>{
         console.log(data.token)
         this.tokenStorage.saveToken(data.token)
-        this.router.navigate(['/workspace']);
+        this.router.navigate(['/login']);
       }
     )
   }
