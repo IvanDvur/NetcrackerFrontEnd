@@ -46,7 +46,10 @@ import {SliderModule} from "primeng/slider";
 import {InputTextModule} from "primeng/inputtext";
 import {RippleModule} from "primeng/ripple";
 import {StyleClassModule} from "primeng/styleclass";
-
+import {
+  SocialLoginModule,
+  SocialAuthServiceConfig, GoogleLoginProvider, GoogleSigninButtonModule,
+} from '@abacritt/angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -62,43 +65,57 @@ import {StyleClassModule} from "primeng/styleclass";
     RegistrationComponent,
     NotFoundComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        MatDialogModule,
-        SidebarModule,
-        ButtonModule,
-        SlideMenuModule,
-        MenuModule,
-        MatIconModule,
-        MatStepperModule,
-        MatToolbarModule,
-        MatListModule,
-        MatSidenavModule,
-        PanelMenuModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        MatDialogModule,
-        MatInputModule,
-        MatDatepickerModule,
-        MatMomentDateModule,
-        MatCheckboxModule,
-        FileUploadModule,
-        CommonModule,
-        MatRadioModule,
-        TableModule,
-        TagModule,
-        DropdownModule,
-        MultiSelectModule,
-        SliderModule,
-        InputTextModule,
-        RippleModule,
-        EmailEditorModule,
-        StyleClassModule
-    ],
-  providers: [httpIterseptorProviders],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MatDialogModule,
+    SidebarModule,
+    ButtonModule,
+    SlideMenuModule,
+    MenuModule,
+    MatIconModule,
+    MatStepperModule,
+    MatToolbarModule,
+    MatListModule,
+    MatSidenavModule,
+    PanelMenuModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatCheckboxModule,
+    FileUploadModule,
+    CommonModule,
+    MatRadioModule,
+    TableModule,
+    TagModule,
+    DropdownModule,
+    MultiSelectModule,
+    SliderModule,
+    InputTextModule,
+    RippleModule,
+    EmailEditorModule,
+    StyleClassModule,
+    SocialLoginModule,
+    GoogleSigninButtonModule
+  ],
+  providers: [ {
+    provide: 'SocialAuthServiceConfig',
+    useValue: {
+      autoLogin: false,
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider('427449141788-volpt3j75dicq8kpajve17vbe1aqqnb0.apps.googleusercontent.com'),
+        },
+      ],
+    } as SocialAuthServiceConfig,
+  }
+    ,httpIterseptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {

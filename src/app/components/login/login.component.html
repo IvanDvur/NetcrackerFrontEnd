@@ -31,9 +31,14 @@
                     </small>
                   </div>
                 </div>
+
                 <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Забыли пароль?</a></p>
                 <button class="btn btn-outline-light btn-lg px-5" type="submit"  [disabled]="checkoutForm.invalid" >Войти</button>
               </form>
+            </div>
+            <div>
+              <button class="btn btn-outline-light btn-lg px-5" (click)="signInWithGoogle()"  >Войти</button>
+              <asl-google-signin-button></asl-google-signin-button>
             </div>
             <div>
               <p class="mb-0" style="color: white">Нет учётной записи? <a (click)="redirectToRegistration()" class="fw-bold" style="color: rgba(48,120,161,1)">Зарегистрироваться</a>
