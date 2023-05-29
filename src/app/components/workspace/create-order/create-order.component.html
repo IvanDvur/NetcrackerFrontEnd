@@ -1,126 +1,67 @@
+
 <div class="top">
 <label class="topic" >Создать рассылку</label>
-    <button   class="btn-ex"  (click)="restart(smsStepper,emailStepper)"  [style.display]="btnExVisible ? 'block' : 'none'">Другая рассылка</button>
+    <button   class="btn-ex"  (click)="reloadCurrentPage()"  [style.display]="btnExVisible ? 'block' : 'none'">Другая рассылка</button>
 </div>
-<mat-radio-group  [(ngModel)]="startChoose"  [style.display]="StartVisible ? 'block' : 'none'">
+<mat-radio-group [style.display]="StartVisible ? 'block' : 'none'">
   <div class="box">
-    <mat-radio-button value="email">Email рассылка</mat-radio-button>
+    <mat-checkbox   (change)="CheckSms()">Sms рассылка</mat-checkbox>
   </div>
   <div class="box">
-    <mat-radio-button value="sms">Sms рассылка</mat-radio-button>
+    <mat-checkbox   (change)="CheckEmail()">Email рассылка</mat-checkbox>
   </div>
 
   <div class="btn-step">
     <button class="button" (click)="start()">Начать</button>
   </div>
-
 </mat-radio-group>
 
 
-
-
-<mat-stepper   #smsStepper [style.display]="smsStepperV ? 'block' : 'none'">
-
-  <mat-step>
-      <ng-template  matStepLabel>Введите текст сообщения</ng-template>
-    <p>Текст вашего сообщения.</p>
-      <mat-form-field class="textarea">
-        <mat-label>Текст сообщения</mat-label>
-        <textarea  matInput  required> </textarea>
-      </mat-form-field>
-      <div class="btn-step">
-        <button class="button" matStepperNext>Дальше</button>
-      </div>
-  </mat-step>
-
-  <mat-step>
-      <ng-template matStepLabel>Выберете дату рассылки</ng-template>
-        <mat-label>Дата рассылки</mat-label>
-      <mat-radio-group [(ngModel)]="chooseTime">
-        <div class="box">
-        <mat-radio-button value="now" (click)="onStartImme($event)">Отправить сразу</mat-radio-button>
-        </div>
-        <div class="box">
-        <mat-radio-button value="data" (click)="onChooseDate($event)">Выбрать дату</mat-radio-button>
-        </div>
-      </mat-radio-group>
-      <div  class="box" [style.display]="selectDataVisible ? 'block' : 'none'">
-        <mat-form-field>
-          <mat-label>Choose a date</mat-label>
-          <input matInput [matDatepicker]="picker1">
-          <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
-        </mat-form-field>
-      </div>
-      <div class="btn-step">
-        <button class="button" matStepperPrevious>Назад</button>
-        <button class="button" matStepperNext>Дальше</button>
-      </div>
-
-  </mat-step>
-
-  <mat-step>
-    <ng-template matStepLabel>Список клиентов.</ng-template>
-    <p>Выберите список клиентов.</p>
-    <div class="btn-step">
-      <button class="button" matStepperPrevious>Назад</button>
-      <button class="button" matStepperNext>Дальше</button>
-    </div>
-
-  </mat-step>
-
-  <mat-step>
-    <ng-template matStepLabel>Готово</ng-template>
-    <p>Рассылка готова!.</p>
-    <div class="btn-step">
-      <button  class="button">Создать</button>
-      <button  class="button" (click)="smsStepper.reset()">Сброс</button>
-    </div>
-
-  </mat-step>
-</mat-stepper>
-
-<mat-stepper   #emailStepper [style.display]="emailStepperV ? 'block' : 'none'">
-
-  <mat-step>
-    <ng-template  matStepLabel>Введите текст и тему письма</ng-template>
-    <p>Тема письма</p>
-    <mat-form-field >
+<mat-stepper   #singleStepper [style.display]="singleStepperV ? 'block' : 'none'">
+  <mat-step [stepControl]="firstFormGroup" *ngIf="emailStepperV">
+    <ng-template matStepLabel >Шаблон письма</ng-template>
+    <form [formGroup]="firstFormGroup">
+    <p >Введите тему письма</p>
+    <mat-form-field>
       <mat-label>Тема</mat-label>
-      <textarea class="textarea" matInput  required> </textarea>
+      <textarea class="textarea" matInput  formControlName="firstCtrl" required> </textarea>
     </mat-form-field>
-    <p>Содержимое письма</p>
-    <mat-form-field class="textarea">
-      <mat-label>текст</mat-label>
-      <textarea class="textarea" matInput  required> </textarea>
-    </mat-form-field>
-    <div class="btn-step">
-      <button class="button" matStepperNext>Дальше</button>
-    </div>
-  </mat-step>
-
-  <mat-step>
-    <ng-template matStepLabel>Шаблон письма</ng-template>
-    <p></p>
-    <div class="btn-step">
-      <button class="button" matStepperPrevious>Назад</button>
-      <button class="button" matStepperNext>Дальше</button>
-
-    </div>
-    <div class="container">
-      <p-button class="p-button-success" (click)="exportHtml()">Экспортировать</p-button>
+    <p >Создайте шаблон письма</p>
+    <div id="unlayer-container">
       <email-editor minHeight="650px"
-        (loaded)="editorLoaded($event)"
-        (ready)="editorReady($event)"
+                    (loaded)="editorLoaded($event)"
+                    (ready)="editorReady($event)"
       ></email-editor>
     </div>
+    <div class="btn-step">
+      <button class="button" matStepperPrevious>Назад</button>
+      <button class="button" matStepperNext>Дальше</button>
+    </div>
+    <div class="box">
+      <p-button class="p-button-success" (click)="exportHtml()">Экспортировать</p-button>
+    </div>
+    </form>
   </mat-step>
 
-  <mat-step>
-    <ng-template matStepLabel>Выберете дату рассылки</ng-template>
-    <mat-label>Дата рассылки</mat-label>
-    <mat-radio-group [(ngModel)]="chooseTime">
+  <mat-step [stepControl]="secondFormGroup" *ngIf="smsStepperV">
+    <ng-template  matStepLabel>Текст сообщения</ng-template>
+    <form [formGroup]="secondFormGroup">
+    <p>Введите текст sms сообщения</p>
+    <mat-form-field>
+      <mat-label>Текст сообщения</mat-label>
+      <textarea  class="textarea" matInput formControlName="secondCtrl" required> </textarea>
+    </mat-form-field>
+    <div class="btn-step">
+      <button class="button" matStepperNext>Дальше</button>
+    </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="thirdFormGroup">
+    <ng-template matStepLabel>Дата и время</ng-template>
+    <form [formGroup]="thirdFormGroup">
+    <mat-label>Выберете дату рассылки</mat-label>
+    <mat-radio-group [(ngModel)]="chooseDate">
       <div class="box">
         <mat-radio-button value="now" (click)="onStartImme($event)">Отправить сразу</mat-radio-button>
       </div>
@@ -131,36 +72,41 @@
     <div  class="box" [style.display]="selectDataVisible ? 'block' : 'none'">
       <mat-form-field>
         <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="picker">
+        <input matInput [matDatepicker]="dataPicker" formControlName="thirdCtrl" required>
         <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-datepicker-toggle matIconSuffix [for]="dataPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dataPicker></mat-datepicker>
       </mat-form-field>
     </div>
+    <mat-label>Выберете время рассылки</mat-label>
     <div class="btn-step">
       <button class="button" matStepperPrevious>Назад</button>
       <button class="button" matStepperNext>Дальше</button>
     </div>
-
+    </form>
   </mat-step>
 
-  <mat-step>
+  <mat-step [stepControl]="FourFormGroup">
     <ng-template matStepLabel>Список клиентов.</ng-template>
-    <p>Выберите список клиентов.</p>
+    <form [formGroup]="FourFormGroup">
+    <p >Выберите список клиентов.</p>
     <div class="btn-step">
       <button class="button" matStepperPrevious>Назад</button>
       <button class="button" matStepperNext>Дальше</button>
     </div>
-
+    </form>
   </mat-step>
 
-  <mat-step>
+  <mat-step [stepControl]="FiveFormGroup">
     <ng-template matStepLabel>Готово</ng-template>
-    <p>Рассылка готова!.</p>
+    <form [formGroup]="FiveFormGroup">
+    <p >Рассылка готова!.</p>
     <div class="btn-step">
       <button  class="button">Создать</button>
-      <button  class="button" (click)="emailStepper.reset()">Сброс</button>
+      <button  class="button" (click)="singleStepper.reset()">Сброс</button>
     </div>
-
+    </form>
   </mat-step>
 </mat-stepper>
+
+

@@ -1,5 +1,5 @@
 .box{
-  margin-bottom: 1%;
+  margin-bottom: 5px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -26,6 +26,8 @@
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
+  margin-top:10px;
+  margin-bottom: 10px;
 }
 
 .topic{
@@ -73,4 +75,9 @@
 
 .textarea{
   width: 50%;
+}
+
+.p{
+  margin-top:10px;
+  margin-bottom: 10px;
 }
