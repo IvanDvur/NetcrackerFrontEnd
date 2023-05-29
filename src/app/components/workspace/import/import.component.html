@@ -1,0 +1,31 @@
+<div class="container pl-3.5" style="height: 990px">
+  <h1>Импорт контактов</h1>
+  <div class="container-upload">
+    <ng-container [formGroup]="this.myFormGroup">
+      <div class="bs-callout bs-callout-orange bs-callout-sm m-3">
+        Поддерживаемые форматы: CSV, XLS, XLSX
+      </div>
+      <div class="flex flex-col gap-2 m-3">
+        <label htmlFor="name" style="font-weight: lighter;">Название</label>
+        <input type="text" aria-describedby="name-help" class="p-inputtext w-1/2" id="name" formControlName="name"/>
+        <small id="name-help">Назовите свой список</small>
+      </div>
+<!--      <p-fileUpload (onUpload)="onClickSubmit()"-->
+<!--                    (onSelect)="selectFile($event)"-->
+<!--                    [auto]="false"-->
+<!--                    [multiple]="false"-->
+<!--                    accept=".csv" class="m-3">-->
+<!--        <ng-template pTemplate="content">-->
+<!--        </ng-template>-->
+<!--      </p-fileUpload >-->
+      <div class="m-3">
+        <input type="file" class="p-fileupload" (change)="selectFile($event)" accept=".csv"
+               formControlName="file">
+      </div>
+      <div>
+        <p-button class="p-button-success m-3" (click)="onClickSubmit()">Создать</p-button>
+      </div>
+    </ng-container>
+  </div>
+</div>
+

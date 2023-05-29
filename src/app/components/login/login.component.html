@@ -1,0 +1,55 @@
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-black" style="border-radius: 4rem;">
+          <div class="card-body p-5 text-center">
+            <div class="mb-md-5 mt-md-4 pb-5">
+              <h1 class="fw-bold mb-2  text-white">Вход</h1>
+              <p class="text-white-50 mb-5">Введите своё имя пользователя и пароль</p>
+              <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+                         formControlName="username">
+                  <label for="floatingInput">Адрес электронной почты</label>
+                  <div class ="validation" *ngIf="checkoutForm.get('username')!.invalid &&checkoutForm.get('username')!.touched">
+                    <small *ngIf ="checkoutForm.get('username')!.errors?.['required']" >
+                      Поле Email не может быть пустым
+                    </small>
+                  </div>
+                </div>
+                <div class="form-floating form-white mb-4">
+                  <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                         formControlName="password">
+                  <label for="floatingPassword">Пароль</label>
+
+                  <div class="validation" *ngIf="checkoutForm.get('password')!.invalid &&checkoutForm.get('password')!.touched">
+                    <small *ngIf ="checkoutForm.get('password')!.errors?.['required']">Пароль не может быть пустым</small>
+                    <small *ngIf ="checkoutForm.get('password')!.errors?.['minlength']">
+                      Длина должна быть не менее {{checkoutForm.get('password')!.errors?.['minlength'].requiredLength}}.
+                      Сейчас колличество символов {{checkoutForm.get('password')!.errors?.['minlength'].actualLength}}
+                    </small>
+                  </div>
+                </div>
+                <p align="center">
+                  <asl-google-signin-button  logo_alignment="center" style="display: block"></asl-google-signin-button>
+                </p>
+                <p class="small mb-2 pb-lg-2"><a class="text-white-50" href="#!">Забыли пароль?</a></p>
+                <div *ngIf="isBadCredentials" class="text-danger">
+                  Неправильные учётные данные
+                </div>
+                <button class="btn btn-outline-light btn-lg px-5" type="submit"  [disabled]="checkoutForm.invalid" >Войти</button>
+              </form>
+            </div>
+
+            <div>
+              <p class="mb-0" style="color: white">Нет учётной записи? <a (click)="redirectToRegistration()" class="fw-bold" style="color: rgba(48,120,161,1)">Зарегистрироваться</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

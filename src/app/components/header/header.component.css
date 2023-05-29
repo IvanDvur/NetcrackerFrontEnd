@@ -1,0 +1,40 @@
+.logo{
+  flex-wrap: wrap;
+  width: 50px;
+  height: 50px;
+}
+.name {
+  transition: color 0.3s, color 0.3s;
+  margin-left: 5%;
+  display: flex;
+  justify-content: normal;
+  align-items: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+}
+.auth-buttons button {
+  flex-wrap: wrap;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-left: 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.generalHeader {
+  flex-wrap: wrap;
+  transition: all 0.3s ease-in-out;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  top: 0;
+  left: 0;
+  right: 0;
+  align-items: center;
+  background-color:#064f95;
+  padding: 20px;
+  z-index: 9999;
+  color: #000000;
+}

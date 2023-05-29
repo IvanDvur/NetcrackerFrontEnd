@@ -1,0 +1,12 @@
+h1{
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.container-contacts{
+  padding: 15px;
+  background-color: white;
+  border-radius: 15px;
+  width: 100%;
+}
+

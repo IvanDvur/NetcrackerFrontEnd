@@ -1,0 +1,75 @@
+
+header{
+  width: 100%;
+  height: 90px;
+}
+.profile-button {
+  flex-wrap: wrap;
+  background-color: #ed3e3e;
+  color: #ffffff;
+}
+
+.menu{
+  display: flex;
+  padding-bottom: 100%;
+  padding-left: 1%;
+  padding-right: 1%;
+  flex-direction: column;
+}
+
+.btn-menu
+{box-shadow: 0px 1px 10px rgba(255, 255, 255, 0.35);
+  transition: background-color 0.3s, color 0.3s;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  padding: 15px 20px;
+  background-color: #dddee591;
+  border-radius: 10px;
+}
+
+.layout-sidebar {
+  position: fixed;
+  left: 0;
+  height: 100%;
+  background-color: #8D8D8D;
+  width: 350px;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: transform .4s cubic-bezier(.05, .74, .2, .99);
+}
+
+.btn-menu:hover{
+  background-color: rgba(243, 243, 243, 0.91);
+}
+.btn-menu.active{
+  background-color: #ed3e3e;
+  color: white;
+}
+.mainbox{
+
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 3rem;
+  padding-top: 1rem;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll
+}
+
+
+.layout-content {
+  margin-left: 350px;
+  padding-top: 2rem;
+}
+
+.workspace{
+  padding-left: 1%;
+  padding-top: 20%;
+  display: flex;
+  width: 100%;
+  background-color: #fafbfc;
+  flex-direction: column;
+  align-items: flex-start;
+
+}
+
