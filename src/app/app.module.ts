@@ -110,7 +110,7 @@ import {
       providers: [
         {
           id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider('427449141788-volpt3j75dicq8kpajve17vbe1aqqnb0.apps.googleusercontent.com'),
+          provider: new GoogleLoginProvider('427449141788-volpt3j75dicq8kpajve17vbe1aqqnb0.apps.googleusercontent.com',{oneTapEnabled:false}),
         },
       ],
     } as SocialAuthServiceConfig,

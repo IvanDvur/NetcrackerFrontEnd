@@ -12,36 +12,40 @@ import {RegistrationService} from "../../services/register/registration.service"
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent implements OnInit{
+export class RegistrationComponent implements OnInit {
 
 
-  checkoutForm!:FormGroup;
-  submitted=false;
+  checkoutForm!: FormGroup;
+  submitted = false;
+  userAlreadyExists = false
   private registerInfo: RegisterInfo;
-  constructor( private formBuilder: FormBuilder,private registerService: RegistrationService,
-               private tokenStorage: TokenStorageService,private router: Router){
+
+  constructor(private formBuilder: FormBuilder, private registerService: RegistrationService,
+              private tokenStorage: TokenStorageService, private router: Router) {
 
   }
 
-  onSubmit(value:any) {
-    this.submitted=true;
-    if(this.checkoutForm.invalid){
+  onSubmit(value: any) {
+    this.submitted = true;
+    if (this.checkoutForm.invalid) {
       return
     }
     console.log(this.checkoutForm.value)
     this.registerInfo = new RegisterInfo(
-      this.checkoutForm.value.username||'',
-      this.checkoutForm.value.password||'',
-      this.checkoutForm.value.matchingPassword||'',
-      this.checkoutForm.value.email||'');
+      this.checkoutForm.value.username || '',
+      this.checkoutForm.value.password || '',
+      this.checkoutForm.value.matchingPassword || '',
+      this.checkoutForm.value.email || '');
 
     this.registerService.attempAuth(this.registerInfo).subscribe(
-      data=>{
+      data => {
         console.log(data.token)
         this.tokenStorage.saveToken(data.token)
         this.router.navigate(['/login']);
-      }
-    )
+      },
+      error => {
+        this.userAlreadyExists = true
+      });
   }
 
   redirectToLogin() {
@@ -54,10 +58,10 @@ export class RegistrationComponent implements OnInit{
 
   ngOnInit(): void {
     this.checkoutForm = this.formBuilder.group({
-      username: ['',[Validators.required,Validators.minLength(8)]],
-      password: ['',[Validators.required,Validators.minLength(8)]],
-      matchingPassword:['', [Validators.required]],
-      email: ['',[Validators.required,Validators.email]]
+      username: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      matchingPassword: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]]
     });
 
   }
