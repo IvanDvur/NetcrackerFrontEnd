@@ -32,7 +32,7 @@ export class CreateOrderComponent {
 
   selectDataVisible: boolean;
   text!: string;
-
+  date:Date[];
   singleStepperV: boolean=false;
   emailStepperV: boolean=false;
   smsStepperV: boolean=false;

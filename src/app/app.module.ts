@@ -50,6 +50,7 @@ import {
   SocialLoginModule,
   SocialAuthServiceConfig, GoogleLoginProvider, GoogleSigninButtonModule,
 } from '@abacritt/angularx-social-login';
+import {CalendarModule} from "primeng/calendar";
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import {
     EmailEditorModule,
     StyleClassModule,
     SocialLoginModule,
-    GoogleSigninButtonModule
+    GoogleSigninButtonModule,
+    CalendarModule
   ],
   providers: [ {
     provide: 'SocialAuthServiceConfig',
