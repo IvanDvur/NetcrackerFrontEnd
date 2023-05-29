@@ -5,13 +5,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {WorkspaceComponent} from './components/workspace/workspace.component';
 import {HomeComponent} from './components/home/home.component';
-
-
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {SidebarComponent} from './components/workspace/sidebar/sidebar.component';
-
 import {SidebarModule} from "primeng/sidebar";
 import {ButtonModule} from "primeng/button";
 import {SlideMenuModule} from "primeng/slidemenu";
@@ -46,8 +43,6 @@ import {SliderModule} from "primeng/slider";
 import {InputTextModule} from "primeng/inputtext";
 import {RippleModule} from "primeng/ripple";
 import {StyleClassModule} from "primeng/styleclass";
-
-
 @NgModule({
   declarations: [
     WorkspaceComponent,
@@ -96,7 +91,7 @@ import {StyleClassModule} from "primeng/styleclass";
         InputTextModule,
         RippleModule,
         EmailEditorModule,
-        StyleClassModule
+        StyleClassModule,
     ],
   providers: [httpIterseptorProviders],
   bootstrap: [AppComponent]

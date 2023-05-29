@@ -1,6 +1,7 @@
+
 <div class="top">
 <label class="topic" >Создать рассылку</label>
-    <button   class="btn-ex"  (click)="restart(singleStepper)"  [style.display]="btnExVisible ? 'block' : 'none'">Другая рассылка</button>
+    <button   class="btn-ex"  (click)="reloadCurrentPage()"  [style.display]="btnExVisible ? 'block' : 'none'">Другая рассылка</button>
 </div>
 <mat-radio-group [style.display]="StartVisible ? 'block' : 'none'">
   <div class="box">
@@ -17,56 +18,50 @@
 
 
 <mat-stepper   #singleStepper [style.display]="singleStepperV ? 'block' : 'none'">
-  <mat-step *ngIf="emailStepperV">
-    <ng-template  matStepLabel>Тема и содержание</ng-template>
+  <mat-step [stepControl]="firstFormGroup" *ngIf="emailStepperV">
+    <ng-template matStepLabel >Шаблон письма</ng-template>
+    <form [formGroup]="firstFormGroup">
     <p >Введите тему письма</p>
     <mat-form-field>
       <mat-label>Тема</mat-label>
-      <textarea class="textarea" matInput  required> </textarea>
+      <textarea class="textarea" matInput  formControlName="firstCtrl" required> </textarea>
     </mat-form-field>
-    <p>Введите текст письма</p>
-    <mat-form-field class="textarea">
-      <mat-label>текст</mat-label>
-      <textarea class="textarea" matInput  required> </textarea>
-    </mat-form-field>
-    <div class="btn-step">
-      <button class="button" matStepperNext>Дальше</button>
+    <p >Создайте шаблон письма</p>
+    <div id="unlayer-container">
+      <email-editor minHeight="650px"
+                    (loaded)="editorLoaded($event)"
+                    (ready)="editorReady($event)"
+      ></email-editor>
     </div>
-  </mat-step>
-
-  <mat-step *ngIf="emailStepperV">
-    <ng-template matStepLabel >Шаблон письма</ng-template>
-    <p>Создайте шаблон письма</p>
     <div class="btn-step">
       <button class="button" matStepperPrevious>Назад</button>
       <button class="button" matStepperNext>Дальше</button>
-
     </div>
-    <div class="container">
+    <div class="box">
       <p-button class="p-button-success" (click)="exportHtml()">Экспортировать</p-button>
-      <email-editor minHeight="650px"
-        (loaded)="editorLoaded($event)"
-        (ready)="editorReady($event)"
-      ></email-editor>
     </div>
+    </form>
   </mat-step>
 
-  <mat-step *ngIf="smsStepperV">
+  <mat-step [stepControl]="secondFormGroup" *ngIf="smsStepperV">
     <ng-template  matStepLabel>Текст сообщения</ng-template>
-    <p >Введите текст sms сообщения</p>
+    <form [formGroup]="secondFormGroup">
+    <p>Введите текст sms сообщения</p>
     <mat-form-field>
-      <mat-label>Тема</mat-label>
-      <textarea class="textarea" matInput  required> </textarea>
+      <mat-label>Текст сообщения</mat-label>
+      <textarea  class="textarea" matInput formControlName="secondCtrl" required> </textarea>
     </mat-form-field>
     <div class="btn-step">
       <button class="button" matStepperNext>Дальше</button>
     </div>
+    </form>
   </mat-step>
 
-  <mat-step>
+  <mat-step [stepControl]="thirdFormGroup">
     <ng-template matStepLabel>Дата и время</ng-template>
+    <form [formGroup]="thirdFormGroup">
     <mat-label>Выберете дату рассылки</mat-label>
-    <mat-radio-group [(ngModel)]="chooseTime">
+    <mat-radio-group [(ngModel)]="chooseDate">
       <div class="box">
         <mat-radio-button value="now" (click)="onStartImme($event)">Отправить сразу</mat-radio-button>
       </div>
@@ -77,40 +72,40 @@
     <div  class="box" [style.display]="selectDataVisible ? 'block' : 'none'">
       <mat-form-field>
         <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="dataPicker">
+        <input matInput [matDatepicker]="dataPicker" formControlName="thirdCtrl" required>
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="dataPicker"></mat-datepicker-toggle>
         <mat-datepicker #dataPicker></mat-datepicker>
       </mat-form-field>
     </div>
     <mat-label>Выберете время рассылки</mat-label>
-    <div>
-
-    </div>
-
-
     <div class="btn-step">
       <button class="button" matStepperPrevious>Назад</button>
       <button class="button" matStepperNext>Дальше</button>
     </div>
+    </form>
   </mat-step>
 
-  <mat-step>
+  <mat-step [stepControl]="FourFormGroup">
     <ng-template matStepLabel>Список клиентов.</ng-template>
-    <p>Выберите список клиентов.</p>
+    <form [formGroup]="FourFormGroup">
+    <p >Выберите список клиентов.</p>
     <div class="btn-step">
       <button class="button" matStepperPrevious>Назад</button>
       <button class="button" matStepperNext>Дальше</button>
     </div>
-
+    </form>
   </mat-step>
-  <mat-step>
+
+  <mat-step [stepControl]="FiveFormGroup">
     <ng-template matStepLabel>Готово</ng-template>
-    <p>Рассылка готова!.</p>
+    <form [formGroup]="FiveFormGroup">
+    <p >Рассылка готова!.</p>
     <div class="btn-step">
       <button  class="button">Создать</button>
       <button  class="button" (click)="singleStepper.reset()">Сброс</button>
     </div>
+    </form>
   </mat-step>
 </mat-stepper>
 
