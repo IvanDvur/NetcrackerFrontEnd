@@ -53,6 +53,7 @@ import {CalendarModule} from "primeng/calendar";
 import {DialogModule} from "primeng/dialog";
 import {MatTabsModule} from "@angular/material/tabs";
 import {EmailEditorModule} from "../../projects/email-editor/src/lib/email-editor.module";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -109,6 +110,7 @@ import {EmailEditorModule} from "../../projects/email-editor/src/lib/email-edito
     CalendarModule,
     DialogModule,
     MatTabsModule,
+    MatSelectModule,
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
