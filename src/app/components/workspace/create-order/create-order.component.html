@@ -1,40 +1,120 @@
 <div class="container p-3.5">
   <div class="top">
-    <label class="topic" >Создать рассылку</label>
-    <button   class="btn-ex"  (click)="reloadCurrentPage()"  [style.display]="btnExVisible ? 'block' : 'none'">Другая рассылка</button>
+    <label class="topic">Создать рассылку</label>
+    <button class="btn btn-danger" (click)="reloadCurrentPage()" *ngIf="isStarted">Другая
+      рассылка
+    </button>
   </div>
-  <mat-radio-group [style.display]="StartVisible ? 'block' : 'none'">
+  <mat-radio-group *ngIf="!isStarted">
     <div class="box">
-      <mat-checkbox   (change)="CheckSms()">Sms рассылка</mat-checkbox>
+      <mat-checkbox (change)="selectSms()">Sms рассылка</mat-checkbox>
     </div>
     <div class="box">
-      <mat-checkbox   (change)="CheckEmail()">Email рассылка</mat-checkbox>
+      <mat-checkbox (change)="selectEmail()">Email рассылка</mat-checkbox>
     </div>
-    <div class="btn-step">
-      <button class="button" (click)="start()">Начать</button>
-    </div>
+    <button class="btn btn-success" (click)="start()">Начать</button>
+
   </mat-radio-group>
 
-
-  <mat-stepper   #singleStepper [style.display]="singleStepperV ? 'block' : 'none'">
-    <mat-step [stepControl]="firstFormGroup" *ngIf="emailStepperV">
-      <ng-template matStepLabel >Шаблон письма</ng-template>
+  <mat-stepper #singleStepper *ngIf="isStarted" [linear]="true">
+    <mat-step [stepControl]="firstFormGroup" *ngIf="emailStepperV && isStarted">
+      <ng-template matStepLabel>Шаблон письма</ng-template>
       <form [formGroup]="firstFormGroup">
-        <p >Введите тему письма</p>
-        <mat-form-field>
-          <mat-label>Тема</mat-label>
-          <textarea class="textarea" matInput  formControlName="firstCtrl" required> </textarea>
-        </mat-form-field>
-        <p >Создайте шаблон письма</p>
-        <div id="unlayer-container">
-          <email-editor minHeight="650px"
-                        (loaded)="editorLoaded($event)"
-                        (ready)="editorReady($event)"
-          ></email-editor>
+        <div class="row">
+          <div class="col-10">
+            <mat-form-field class="w-100">
+              <mat-label>Введите тему письма</mat-label>
+              <input class="textarea" matInput placeholder="Например, &quot;Скидки в честь 8 марта!&quot;"
+                     formControlName="firstCtrl" required>
+            </mat-form-field>
+          </div>
+          <div class="col-1">
+            <button class="btn btn-danger w-100 h-75" style="color: black" matStepperPrevious>Назад</button>
+          </div>
+          <div class="col-1">
+            <button class="btn btn-success w-100 h-75" style="color: black" matStepperNext>Далее</button>
+          </div>
         </div>
-        <div class="btn-step">
-          <button class="button" matStepperPrevious>Назад</button>
-          <button class="button" matStepperNext>Дальше</button>
+        <div class="card text-center">
+          <mat-tab-group>
+            <mat-tab (click)="resetEditor()" label="HTML Редактор">
+              <div id="unlayer-container">
+                <email-editor minHeight="650px"
+                              (loaded)="editorLoaded($event)"
+                              (ready)="editorReady($event)"
+                ></email-editor>
+              </div>
+            </mat-tab>
+            <mat-tab label="Стандартные шаблоны">
+              <div class="container" style="height: 650px">
+                <div class="row row-cols-4">
+                  <div class="col">
+                    <div class="card" style="width: 18rem;">
+                      <img src="..." class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                          the
+                          card's content.</p>
+                        <p-button (click)="showDialog()" icon="pi pi-external-link" label="Show"></p-button>
+                        <p-dialog header="Header" [(visible)]="visible" [modal]="true"
+                                  [style]="{ width: '80vw',height: '50vw'}"
+                                  [draggable]="false" [resizable]="false">
+                        </p-dialog>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card" style="width: 18rem;">
+                      <img src="..." class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                          the
+                          card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card" style="width: 18rem;">
+                      <img src="..." class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                          the
+                          card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card" style="width: 18rem;">
+                      <img src="..." class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                          the
+                          card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab label="Вставить HTML">
+              <mat-form-field class="p-4 w-100" style="height: 650px">
+                <mat-label>Вставьте HTML-код страницы</mat-label>
+                <input class="textarea" matInput placeholder="Например, <div>Hello World!<div>"
+                       formControlName="firstCtrl" required>
+              </mat-form-field>
+            </mat-tab>
+            <mat-tab label="Мои шаблоны">
+              <div class="container" style="height: 650px">
+              </div>
+            </mat-tab>
+          </mat-tab-group>
         </div>
         <div class="box">
           <p-button class="p-button-success" (click)="exportHtml()">Экспортировать</p-button>
@@ -42,65 +122,70 @@
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="secondFormGroup" *ngIf="smsStepperV">
-      <ng-template  matStepLabel>Текст сообщения</ng-template>
+    <mat-step [stepControl]="secondFormGroup" *ngIf="smsStepperV && isStarted">
+      <ng-template matStepLabel>Текст сообщения</ng-template>
       <form [formGroup]="secondFormGroup">
-        <p>Введите текст sms сообщения</p>
-        <mat-form-field>
-          <mat-label>Текст сообщения</mat-label>
-          <textarea  class="textarea" matInput formControlName="secondCtrl" required> </textarea>
-        </mat-form-field>
-        <div class="btn-step">
-          <button class="button" matStepperNext>Дальше</button>
+        <div class="row">
+          <div class="col-10">
+            <mat-form-field class="w-100">
+              <mat-label>Введите текст SMS сообщения</mat-label>
+              <input class="textarea" matInput
+                     placeholder="Например, &quot;Приглашаем на распродажу в честь открытия!&quot;"
+                     formControlName="secondCtrl" required>
+            </mat-form-field>
+          </div>
+          <div class="col-1">
+            <button class="btn btn-danger w-100 h-75" style="color: black" matStepperPrevious>Назад</button>
+          </div>
+          <div class="col-1">
+            <button class="btn btn-success w-100 h-75" style="color: black" matStepperNext>Далее</button>
+          </div>
         </div>
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="thirdFormGroup">
-      <ng-template matStepLabel>Дата и время</ng-template>
+    <mat-step [stepControl]="thirdFormGroup" *ngIf="isStarted">
+      <ng-template matStepLabel>Параметры рассылки</ng-template>
       <form [formGroup]="thirdFormGroup">
-        <mat-label>Выберете дату рассылки</mat-label>
-        <mat-radio-group [(ngModel)]="chooseDate">
-          <div class="box">
-            <mat-radio-button value="now" (click)="onStartImme($event)">Отправить сразу</mat-radio-button>
+        <div class="row">
+          <div class="col-10">
+            <h2>Выберите время рассылки</h2>
+            <mat-radio-group [(ngModel)]="chooseDate">
+              <mat-radio-button value="now" (click)="onStartImme($event)">Отправить сразу</mat-radio-button>
+              <mat-radio-button value="data" (click)="onChooseDate($event)">Выбрать дату</mat-radio-button>
+            </mat-radio-group>
           </div>
-          <div class="box">
-            <mat-radio-button value="data" (click)="onChooseDate($event)">Выбрать дату</mat-radio-button>
+          <div class="col-1">
+            <button class="btn btn-danger w-100 h-75" style="color: black" matStepperPrevious>Назад</button>
           </div>
-        </mat-radio-group>
-        <div  class="box" [style.display]="selectDataVisible ? 'block' : 'none'">
+          <div class="col-1">
+            <button class="btn btn-success w-100 h-75" style="color: black" matStepperNext>Далее</button>
+          </div>
+        </div>
+        <div class="box" [style.display]="selectDataVisible ? 'block' : 'none'">
           <p-calendar [(ngModel)]="date" [showTime]="true" [showSeconds]="false"></p-calendar>
         </div>
-        <mat-label>Выберете время рассылки</mat-label>
-        <div class="btn-step">
-          <button class="button" matStepperPrevious>Назад</button>
-          <button class="button" matStepperNext>Дальше</button>
-        </div>
       </form>
     </mat-step>
+<!--    <mat-step [stepControl]="fourFormGroup" *ngIf="isStarted">-->
+<!--      <ng-template matStepLabel>Список клиентов</ng-template>-->
+<!--      <form [formGroup]="fourFormGroup">-->
+<!--        <p>Выберите список клиентов.</p>-->
 
-    <mat-step [stepControl]="FourFormGroup">
-      <ng-template matStepLabel>Список клиентов.</ng-template>
-      <form [formGroup]="FourFormGroup">
-        <p >Выберите список клиентов.</p>
+<!--      </form>-->
+<!--    </mat-step>-->
+    <mat-step [stepControl]="fiveFormGroup" *ngIf="isStarted">
+      <ng-template matStepLabel>Подтверждение</ng-template>
+      <form [formGroup]="fiveFormGroup">
+        <p>Рассылка готова!.</p>
         <div class="btn-step">
-          <button class="button" matStepperPrevious>Назад</button>
-          <button class="button" matStepperNext>Дальше</button>
-        </div>
-      </form>
-    </mat-step>
-
-    <mat-step [stepControl]="FiveFormGroup">
-      <ng-template matStepLabel>Готово</ng-template>
-      <form [formGroup]="FiveFormGroup">
-        <p >Рассылка готова!.</p>
-        <div class="btn-step">
-          <button  class="button">Создать</button>
-          <button  class="button" (click)="singleStepper.reset()">Сброс</button>
+          <button class="button">Создать</button>
+          <button class="button" (click)="singleStepper.reset()">Сброс</button>
         </div>
       </form>
     </mat-step>
   </mat-stepper>
+
 </div>
 
 

@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {EmailEditorModule} from "../../projects/email-editor/src/lib/email-editor.module";
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {WorkspaceComponent} from './components/workspace/workspace.component';
@@ -51,6 +50,10 @@ import {
   SocialAuthServiceConfig, GoogleLoginProvider, GoogleSigninButtonModule,
 } from '@abacritt/angularx-social-login';
 import {CalendarModule} from "primeng/calendar";
+import {DialogModule} from "primeng/dialog";
+import {MatTabsModule} from "@angular/material/tabs";
+import {EmailEditorModule} from "../../projects/email-editor/src/lib/email-editor.module";
+
 
 @NgModule({
   declarations: [
@@ -64,7 +67,7 @@ import {CalendarModule} from "primeng/calendar";
     LoginComponent,
     HeaderComponent,
     RegistrationComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -103,21 +106,23 @@ import {CalendarModule} from "primeng/calendar";
     StyleClassModule,
     SocialLoginModule,
     GoogleSigninButtonModule,
-    CalendarModule
+    CalendarModule,
+    DialogModule,
+    MatTabsModule,
   ],
-  providers: [ {
+  providers: [{
     provide: 'SocialAuthServiceConfig',
     useValue: {
       autoLogin: false,
       providers: [
         {
           id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider('427449141788-volpt3j75dicq8kpajve17vbe1aqqnb0.apps.googleusercontent.com',{oneTapEnabled:false}),
+          provider: new GoogleLoginProvider('427449141788-volpt3j75dicq8kpajve17vbe1aqqnb0.apps.googleusercontent.com', {oneTapEnabled: false}),
         },
       ],
     } as SocialAuthServiceConfig,
   }
-    ,httpIterseptorProviders],
+    , httpIterseptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {

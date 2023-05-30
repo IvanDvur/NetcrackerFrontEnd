@@ -1,9 +1,10 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {MatStepper} from "@angular/material/stepper";
-import {EmailEditorComponent} from "../../../../../projects/email-editor/src/lib/email-editor.component";
 import sampleTamplate from './src.json'
 import {Time} from "@angular/common";
+import {EmailEditorComponent} from "../../../../../projects/email-editor/src/lib/email-editor.component";
+
 
 
 @Component({
@@ -11,58 +12,57 @@ import {Time} from "@angular/common";
   templateUrl: './create-order.component.html',
   styleUrls: ['./create-order.component.css']
 })
-export class CreateOrderComponent {
-  firstFormGroup = this._formBuilder.group({
+export class CreateOrderComponent{
+  firstFormGroup = this.formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
-  secondFormGroup = this._formBuilder.group({
+  secondFormGroup = this.formBuilder.group({
     secondCtrl: ['', Validators.required],
   });
-  thirdFormGroup = this._formBuilder.group({
+  thirdFormGroup = this.formBuilder.group({
     thirdCtrl: ['', Validators.required],
   });
-  FourFormGroup = this._formBuilder.group({
-    FourCtrl: ['', Validators.required],
+  fourFormGroup = this.formBuilder.group({
+    fourCtrl: ['', Validators.required],
   });
-  FiveFormGroup = this._formBuilder.group({
-    FiveCtrl: ['', Validators.required],
+  fiveFormGroup = this.formBuilder.group({
+    fiveCtrl: ['', Validators.required],
   });
-  isLinear = false;
-  constructor(private _formBuilder: FormBuilder) {}
 
+
+
+  constructor(private formBuilder: FormBuilder) {
+  }
+
+  visible=false
   selectDataVisible: boolean;
   text!: string;
-  date:Date[];
-  singleStepperV: boolean=false;
-  emailStepperV: boolean=false;
-  smsStepperV: boolean=false;
-  StartVisible:boolean=true;
-  btnExVisible:boolean=false;
-
-  emailChoose: boolean=false;
-  smsChoose:boolean=false;
+  date: Date[];
+  isStarted: boolean = false;
+  emailStepperV: boolean = false;
+  smsStepperV: boolean = false;
   chooseDate: any;
-
   selectedDate!: Date;
   selectedTime: Time;
 
+  @ViewChild('singleStepper') s!: MatStepper;
   @ViewChild(EmailEditorComponent)
-  private emailEditor: EmailEditorComponent;
+  private emailEditor:EmailEditorComponent
   private id: string;
 
+  showDialog(){
+    this.visible=true
+  }
   // called when the editor is created
-  editorLoaded(event:any) {
+  editorLoaded(event: any) {
     console.log('editorLoaded');
     this.emailEditor.editor.loadDesign(sampleTamplate);
-    this.emailEditor.editorId="unlayer-container";
-    // load the design json here
-    // this.emailEditor.editor.loadDesign({});
   }
 
   // called when the editor has finished loading
-  editorReady(event:any) {
+  editorReady(event: any) {
     console.log('editorReady');
-    this.id=this.emailEditor.editorId;
+    this.id = this.emailEditor.editorId;
   }
 
   exportHtml() {
@@ -72,46 +72,30 @@ export class CreateOrderComponent {
   }
 
   onChooseDate(event: Event) {
-      this.selectDataVisible = true;
-    }
-
-  onStartImme(event: Event)
-  {
-      this.selectDataVisible = false;
+    this.selectDataVisible = true;
   }
 
-  CheckSms() {
-    this.smsChoose = !this.smsChoose;
+  onStartImme(event: Event) {
+    this.selectDataVisible = false;
   }
 
-  CheckEmail() {
-    this.emailChoose = !this.emailChoose;
+  selectSms() {
+    this.smsStepperV = !this.smsStepperV;
   }
 
-  start()
-  {
-    this.singleStepperV=true;
-    if(this.smsChoose) {
-      this.emailStepperV = false;
-      this.smsStepperV = true;
-    }
-    if(this.emailChoose) {
-        this.emailStepperV = true;
-        this.smsStepperV = false;
-    }
-    if(this.emailChoose && this.smsChoose) {
-        this.emailStepperV = true;
-        this.smsStepperV = true;
-    }
-    this.StartVisible=false;
-    this.btnExVisible=true;
+  selectEmail() {
+    this.emailStepperV = !this.emailStepperV;
   }
 
-  @ViewChild('singleStepper') s!: MatStepper;
+  start() {
+    this.isStarted = true;
+  }
 
   reloadCurrentPage() {
     window.location.reload();
   }
 
+  resetEditor() {
 
+  }
 }

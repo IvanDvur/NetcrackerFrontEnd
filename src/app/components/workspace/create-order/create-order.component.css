@@ -37,27 +37,9 @@
   font-size: 22px;
 }
 
-.button{
-  flex-wrap: wrap;
-  background-color: #ed3e3e;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-  transition: background-color 0.3s, color 0.3s;
-  margin-right:5%
-}
 
-.btn-ex{
-  background-color: #ed3e3e;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 10px;
-  font-size: 16px;
-  transition: background-color 0.3s, color 0.3s;
-}
+
+
 .top{
   margin-bottom: 1%;
   display: flex;
@@ -69,17 +51,11 @@
   background-color: #bb2d3b;
 }
 
-.btn-ex:hover{
-  background-color: #bb2d3b;
-}
-
-.textarea{
-  width: 50%;
-}
-
 
 
 :host ::ng-deep .mat-horizontal-content-container {
   padding:0 !important;
   height: 900px;
+  position: relative;
+  top:0px;
 }
