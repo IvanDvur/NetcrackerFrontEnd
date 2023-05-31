@@ -10,6 +10,7 @@ import {RegistrationComponent} from "./components/registration/registration.comp
 import {NotFoundComponent} from "./components/not-found/not-found.component";
 
 import {canActivate, canActivateChild} from "./auth.guardTest";
+import {ActiveOrdersComponent} from "./components/workspace/active-orders/active-orders.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -22,6 +23,7 @@ const routes: Routes = [
       {path: 'import', component: ImportComponent},
       {path: 'contacts', component: ContactsComponent},
       {path: 'create-order', component: CreateOrderComponent},
+      {path: 'active-orders', component: ActiveOrdersComponent}
     ]
   },
   {path: 'login', component: LoginComponent},

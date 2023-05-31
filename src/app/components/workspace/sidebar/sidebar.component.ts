@@ -45,7 +45,8 @@ export class SidebarComponent implements OnInit {
         items: [
           {
             label: 'Активные или запланированные рассылки',
-            icon: 'pi pi-fw pi-align-left'
+            icon: 'pi pi-fw pi-align-left',
+            routerLink: '/workspace/active-orders'
           },
           {
             label: 'Выполненные рассылки',

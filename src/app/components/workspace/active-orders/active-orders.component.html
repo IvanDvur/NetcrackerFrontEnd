@@ -1,0 +1,28 @@
+<p-table [value]="activeOrders" [tableStyle]="{'min-width': '60rem'}">
+  <ng-template pTemplate="caption">
+    <div class="flex align-items-center justify-content-between">
+      Products
+      <p-button icon="pi pi-refresh"></p-button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Имя рассылки</th>
+      <th>Шаблон</th>
+      <th>Список клиентов</th>
+      <th>Дата начала отправки</th>
+      <th>Статус Email рассылки</th>
+      <th>Статус Sms рассылки</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body"  let-order>
+    <tr>
+      <td>{{order.name}}</td>
+      <td [innerHTML]="order.template"></td>
+      <td></td>
+      <td>{{order.sendStartDate}}</td>
+      <td>{{order.emailStatus}}</td>
+      <td>{{order.smsStatus}}</td>
+    </tr>
+  </ng-template>
+</p-table>

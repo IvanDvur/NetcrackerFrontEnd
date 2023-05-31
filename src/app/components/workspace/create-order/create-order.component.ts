@@ -2,11 +2,16 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatStepper} from "@angular/material/stepper";
 import sampleTamplate from './src.json'
-import {Time} from "@angular/common";
 import {EmailEditorComponent} from "../../../../../projects/email-editor/src/lib/email-editor.component";
 import {MailingList} from "../contacts/mailingList";
-import {ContactsService} from "../../../services/customer/contacts.service";
-
+import {ContactsService} from "../../../services/contacts/contacts.service";
+import {OrderForm} from "../../../services/order/order-model";
+import {SmsAdvertisement} from "../../../services/order/smsAdvertisement";
+import {EmailAdvertisement} from "../../../services/order/emailAdvertisement";
+import {Schedule} from "../../../services/order/schedule";
+import {Buffer} from "buffer";
+import moment from "moment";
+import {OrderService} from "../../../services/order/order.service";
 
 
 @Component({
@@ -14,71 +19,47 @@ import {ContactsService} from "../../../services/customer/contacts.service";
   templateUrl: './create-order.component.html',
   styleUrls: ['./create-order.component.css']
 })
-export class CreateOrderComponent implements OnInit{
-  ngOnInit(): void {
-    this.contactsService.fetch().subscribe(data => {
-      this.mailingLists = data
-    })
-
-    this.orderForm=new FormGroup({
-      emailFormGroup:new FormGroup({
-        topic:new FormControl('', Validators.required),
-        template:new FormControl('',Validators.required)
-      }),
-      smsFormGroup:new FormGroup({
-        textSms:new FormControl('',Validators.required),
-      }),
-      dateFormGroup:new FormGroup({
-        schedule:new FormControl('',Validators.required),
-        clientListId:new FormControl('',Validators.required)
-      }),
-
-
-    })
-  }
-  // firstFormGroup = this.formBuilder.group({
-  //   firstCtrl: ['', Validators.required],
-  // });
-  // secondFormGroup = this.formBuilder.group({
-  //   secondCtrl: ['', Validators.required],
-  // });
-  // thirdFormGroup = this.formBuilder.group({
-  //   thirdCtrl: ['', Validators.required],
-  // });
-  fourFormGroup = this.formBuilder.group({
-    fourCtrl: ['', Validators.required],
-  });
-  fiveFormGroup = this.formBuilder.group({
-    fiveCtrl: ['', Validators.required],
-  });
-
-
-
-  constructor(private formBuilder: FormBuilder,private contactsService:ContactsService) {
-  }
-  orderForm: FormGroup;
-  visible=false
-  selectDataVisible: boolean;
-  text!: string;
-  date: Date[];
-  isStarted: boolean = false;
-  emailStepperV: boolean = false;
-  smsStepperV: boolean = false;
-  chooseDate: any;
-  selectedDate!: Date;
-  selectedTime: Time;
-  valid:boolean;
-  mailingLists: MailingList[];
-
+export class CreateOrderComponent implements OnInit {
 
   @ViewChild('singleStepper') s!: MatStepper;
   @ViewChild(EmailEditorComponent)
-  private emailEditor:EmailEditorComponent
-  private id: string;
+  private emailEditor: EmailEditorComponent
+  orderForm: FormGroup;
+  orderRequest: OrderForm;
+  selectDataVisible: boolean;
+  private text!: string;
+  minDate: Date;
+  isStarted: boolean = false;
+  emailStepperV: boolean = false;
+  smsStepperV: boolean = false;
+  private chooseDate: any;
+  private valid: boolean;
+  mailingLists: MailingList[];
 
-  showDialog(){
-    this.visible=true
+  constructor(private formBuilder: FormBuilder,
+              private contactsService: ContactsService, private orderService: OrderService) {
   }
+
+  ngOnInit(): void {
+    this.minDate = moment(new Date()).add(10, 'm').toDate();
+    this.contactsService.fetch().subscribe(data => {
+      this.mailingLists = data
+    })
+    this.orderForm = new FormGroup({
+      emailFormGroup: new FormGroup({
+        topic: new FormControl('', Validators.required),
+        template: new FormControl('', Validators.required)
+      }),
+      smsFormGroup: new FormGroup({
+        textSms: new FormControl('', Validators.required),
+      }),
+      dateFormGroup: new FormGroup({
+        schedule: new FormControl('', Validators.required),
+        clientListId: new FormControl('', Validators.required)
+      }),
+    })
+  }
+
   // called when the editor is created
   editorLoaded(event: any) {
     console.log('editorLoaded');
@@ -86,17 +67,18 @@ export class CreateOrderComponent implements OnInit{
   }
 
   // called when the editor has finished loading
-
   editorReady(event: any) {
     console.log('editorReady');
-    this.id = this.emailEditor.editorId;
   }
 
   exportHtml() {
-    this.emailEditor.editor.exportHtml((data) =>
-      console.log('exportHtml', data)
+    this.emailEditor.editor.exportHtml((data) => {
+        console.log('exportHtml', data)
+        this.orderForm.get('emailFormGroup').get('template').setValue(data.html)
+      }
     );
   }
+
 
   onChooseDate(event: Event) {
     this.selectDataVisible = true;
@@ -128,12 +110,34 @@ export class CreateOrderComponent implements OnInit{
   }
 
   resetEditor() {
-
   }
 
+  onSubmit(value: any) {
+    const encodedTemplate = Buffer.from(value.emailFormGroup.template).toString('base64')
+    const topic = value.emailFormGroup.topic
+    const image = null
+    const textSms = value.smsFormGroup.textSms
+    const mailingListId = value.dateFormGroup.clientListId
+    let schedule;
+    if (!this.selectDataVisible) {
+      schedule = new Schedule(moment(new Date()).add(10, 'minute').format("DD-MM-YYYY HH:mm"))
+    } else {
+      schedule = new Schedule(moment(value.dateFormGroup.schedule).format("DD-MM-YYYY HH:mm"))
+    }
 
-  onSubmit(value:any) {
+    let sendTypes = "";
+    if (this.emailStepperV) {
+      sendTypes = sendTypes.concat("EMAIL,")
+    }
+    if (this.smsStepperV) {
+      sendTypes = sendTypes.concat("SMS,")
+    }
     console.log(value);
-
+    this.orderRequest = new OrderForm('name',
+      new EmailAdvertisement(encodedTemplate, topic, image),
+      new SmsAdvertisement(textSms),
+      mailingListId, sendTypes, [schedule])
+    console.log(this.orderRequest)
+    this.orderService.postOrder(this.orderRequest).subscribe()
   }
 }

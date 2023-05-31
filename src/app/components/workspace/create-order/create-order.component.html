@@ -29,10 +29,10 @@
             </mat-form-field>
           </div>
           <div class="col-1">
-            <button class="btn btn-danger w-100 h-75" style="color: black" matStepperPrevious>Назад</button>
+            <button class="btn btn-danger w-100 h-75" type="button" style="color: black" matStepperPrevious>Назад</button>
           </div>
           <div class="col-1">
-            <button class="btn btn-success w-100 h-75" style="color: black" matStepperNext>Далее</button>
+            <button class="btn btn-success w-100 h-75" type="button" style="color: black" matStepperNext>Далее</button>
           </div>
         </div>
         <div class="card text-center">
@@ -46,8 +46,6 @@
               </div>
             </mat-tab>
             <mat-tab label="Стандартные шаблоны">
-
-
             </mat-tab>
             <mat-tab label="Вставить HTML">
               <mat-form-field class="p-4 w-100" style="height: 650px">
@@ -81,10 +79,10 @@
             </mat-form-field>
           </div>
           <div class="col-1">
-            <button class="btn btn-danger w-100 h-75" style="color: black" matStepperPrevious>Назад</button>
+            <button class="btn btn-danger w-100 h-75" type="button" style="color: black" matStepperPrevious>Назад</button>
           </div>
           <div class="col-1">
-            <button class="btn btn-success w-100 h-75" style="color: black" matStepperNext>Далее</button>
+            <button class="btn btn-success w-100 h-75" type="button" style="color: black" matStepperNext>Далее</button>
           </div>
         </div>
       </div>
@@ -102,21 +100,21 @@
             </mat-radio-group>
           </div>
           <div class="col-1">
-            <button class="btn btn-danger w-100 h-75" style="color: black" matStepperPrevious>Назад</button>
+            <button class="btn btn-danger w-100 h-75" type="button" style="color: black" matStepperPrevious>Назад</button>
           </div>
           <div class="col-1">
-            <button class="btn btn-success w-100 h-75" style="color: black" matStepperNext>Далее</button>
+            <button class="btn btn-success w-100 h-75" type="button" style="color: black" matStepperNext>Далее</button>
           </div>
         </div>
         <div class="box" [style.display]="selectDataVisible ? 'block' : 'none'">
-          <p-calendar  [showTime]="true" [showSeconds]="false" formControlName="schedule"></p-calendar>
+          <p-calendar [minDate]="minDate" [defaultDate]="minDate" [showTime]="true" [showSeconds]="false" formControlName="schedule"></p-calendar>
         </div>
         <div class="row">
           <h2>Выберите клиентов, которым хотите разослать сообщения</h2>
           <mat-form-field>
             <mat-label>Выберите группу клиентов из выпадающего списка</mat-label>
             <mat-select  formControlName="clientListId" required>
-              <mat-option>--</mat-option>
+              <mat-option routerLink="/workspace/import">Добавить список</mat-option>
               <mat-option *ngFor="let list of mailingLists" [value]="list.id">
                 {{list.name}}
               </mat-option>
@@ -125,24 +123,13 @@
             <!--            <mat-hint>Вы отправите сообщения клиентам из списка "{{mailingLists.values?.name}}"</mat-hint>-->
           </mat-form-field>
         </div>
-
-
-
       </form>
     </mat-step>
-<!--    <mat-step [stepControl]="fourFormGroup" *ngIf="isStarted">-->
-<!--      <ng-template matStepLabel>Список клиентов</ng-template>-->
-<!--      <form [formGroup]="fourFormGroup">-->
-<!--        <p>Выберите список клиентов.</p>-->
-
-<!--      </form>-->
-<!--    </mat-step>-->
     <mat-step  *ngIf="isStarted">
       <ng-template matStepLabel>Подтверждение</ng-template>
         <div >
         <p>Рассылка готова!.</p>
         <div >
-
           <button class="btn btn-danger" (click)="singleStepper.reset()">Сброс</button>
           <button class="btn btn-success p-2"  style="color:black" type="submit">Создать</button>
         </div>

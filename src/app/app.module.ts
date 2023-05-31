@@ -4,13 +4,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {WorkspaceComponent} from './components/workspace/workspace.component';
 import {HomeComponent} from './components/home/home.component';
-
-
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {SidebarComponent} from './components/workspace/sidebar/sidebar.component';
-
 import {SidebarModule} from "primeng/sidebar";
 import {ButtonModule} from "primeng/button";
 import {SlideMenuModule} from "primeng/slidemenu";
@@ -45,16 +42,16 @@ import {SliderModule} from "primeng/slider";
 import {InputTextModule} from "primeng/inputtext";
 import {RippleModule} from "primeng/ripple";
 import {StyleClassModule} from "primeng/styleclass";
-import {
-  SocialLoginModule,
-  SocialAuthServiceConfig, GoogleLoginProvider, GoogleSigninButtonModule,
-} from '@abacritt/angularx-social-login';
+import {SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, GoogleSigninButtonModule}
+  from '@abacritt/angularx-social-login';
 import {CalendarModule} from "primeng/calendar";
 import {DialogModule} from "primeng/dialog";
 import {MatTabsModule} from "@angular/material/tabs";
 import {EmailEditorModule} from "../../projects/email-editor/src/lib/email-editor.module";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
+import {TabViewModule} from "primeng/tabview";
+import { ActiveOrdersComponent } from './components/workspace/active-orders/active-orders.component';
 
 
 @NgModule({
@@ -70,50 +67,52 @@ import {MatSelectModule} from "@angular/material/select";
     HeaderComponent,
     RegistrationComponent,
     NotFoundComponent,
+    ActiveOrdersComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    MatDialogModule,
-    SidebarModule,
-    ButtonModule,
-    SlideMenuModule,
-    MenuModule,
-    MatIconModule,
-    MatStepperModule,
-    MatToolbarModule,
-    MatListModule,
-    MatSidenavModule,
-    PanelMenuModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    MatDialogModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatMomentDateModule,
-    MatCheckboxModule,
-    FileUploadModule,
-    CommonModule,
-    MatRadioModule,
-    TableModule,
-    TagModule,
-    DropdownModule,
-    MultiSelectModule,
-    SliderModule,
-    InputTextModule,
-    RippleModule,
-    EmailEditorModule,
-    StyleClassModule,
-    SocialLoginModule,
-    GoogleSigninButtonModule,
-    CalendarModule,
-    DialogModule,
-    MatTabsModule,
-    MatOptionModule,
-    MatSelectModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        MatDialogModule,
+        SidebarModule,
+        ButtonModule,
+        SlideMenuModule,
+        MenuModule,
+        MatIconModule,
+        MatStepperModule,
+        MatToolbarModule,
+        MatListModule,
+        MatSidenavModule,
+        PanelMenuModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatMomentDateModule,
+        MatCheckboxModule,
+        FileUploadModule,
+        CommonModule,
+        MatRadioModule,
+        TableModule,
+        TagModule,
+        DropdownModule,
+        MultiSelectModule,
+        SliderModule,
+        InputTextModule,
+        RippleModule,
+        EmailEditorModule,
+        StyleClassModule,
+        SocialLoginModule,
+        GoogleSigninButtonModule,
+        CalendarModule,
+        DialogModule,
+        MatTabsModule,
+        MatOptionModule,
+        MatSelectModule,
+        TabViewModule,
+    ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
     useValue: {
@@ -129,5 +128,5 @@ import {MatSelectModule} from "@angular/material/select";
     , httpIterseptorProviders],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+
+export class AppModule {}
