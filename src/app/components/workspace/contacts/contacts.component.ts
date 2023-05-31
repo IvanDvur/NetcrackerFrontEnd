@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MailingList} from "./mailingList";
 import {Table} from "primeng/table";
-import {ContactsService} from "../../../services/customer/contacts.service";
+import {ContactsService} from "../../../services/contacts/contacts.service";
 
 
 @Component({
