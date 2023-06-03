@@ -1,16 +1,14 @@
 
-<header>
-  <app-header></app-header>
-</header>
-<aside class="layout-sidebar overflow-scroll">
-  <nav class="ml-5">
-    <app-sidebar></app-sidebar>
-  </nav>
-</aside>
-
-<div class="layout-content">
-  <div class="container">
-    <router-outlet></router-outlet>
+<div class="container">
+  <div class="layout-sidebar">
+    <nav class="ml-5">
+      <app-sidebar></app-sidebar>
+    </nav>
+  </div>
+  <div class="layout-content">
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
 

@@ -52,6 +52,7 @@ import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {TabViewModule} from "primeng/tabview";
 import { ActiveOrdersComponent } from './components/workspace/active-orders/active-orders.component';
+import {ToastModule} from "primeng/toast";
 
 
 @NgModule({
@@ -112,6 +113,7 @@ import { ActiveOrdersComponent } from './components/workspace/active-orders/acti
         MatOptionModule,
         MatSelectModule,
         TabViewModule,
+        ToastModule,
     ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

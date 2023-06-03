@@ -1,19 +1,12 @@
-.drop-zone{
-  background-color: lightskyblue;
-  border-width: 2px;
-  border-style: dashed;
-  border-color: black;
-  padding: 100px;
-  text-align: center;
-  /*margin-left: 100px;*/
-  border-radius: 15px;
-  margin-bottom: 5%;
-  width: 50%;
-  margin-top: 5%;
-}
 h1{
   font-size: 32px;
   font-weight: bold;
+}
+:host ::ng-deep .p-toast-top-right{
+  top: 100px
+}
+.p-toast-success{
+  margin-top: 200px;
 }
 .bs-callout {
   color: #666;

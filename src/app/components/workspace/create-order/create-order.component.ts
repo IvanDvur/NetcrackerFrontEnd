@@ -41,7 +41,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.minDate = moment(new Date()).add(10, 'm').toDate();
+    this.minDate = moment(new Date()).add(2, 'm').toDate();
     this.contactsService.fetch().subscribe(data => {
       this.mailingLists = data
     })
@@ -120,7 +120,7 @@ export class CreateOrderComponent implements OnInit {
     const mailingListId = value.dateFormGroup.clientListId
     let schedule;
     if (!this.selectDataVisible) {
-      schedule = new Schedule(moment(new Date()).add(10, 'minute').format("DD-MM-YYYY HH:mm"))
+      schedule = new Schedule(moment(new Date()).add(2, 'minute').format("DD-MM-YYYY HH:mm"))
     } else {
       schedule = new Schedule(moment(value.dateFormGroup.schedule).format("DD-MM-YYYY HH:mm"))
     }
