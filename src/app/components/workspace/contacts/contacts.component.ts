@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {MailingList} from "./mailingList";
 import {Table} from "primeng/table";
 import {ContactsService} from "../../../services/contacts/contacts.service";
+import {PrimeNGConfig} from "primeng/api";
+import {HttpClient} from "@angular/common/http";
 
 
 @Component({
@@ -16,10 +18,18 @@ export class ContactsComponent {
   mailingLists: MailingList[];
 
 
-  constructor(private contactsService: ContactsService) {
+  constructor(private contactsService: ContactsService,
+              private config: PrimeNGConfig,
+              private http: HttpClient) {
   }
 
   ngOnInit() {
+    //перевод
+    this.http.get('assets/ru.json').subscribe((data: any) => {
+      this.config.setTranslation(data);
+    });
+    //
+
     this.fetchMailingLists()
     console.log(this.mailingLists)
   }
