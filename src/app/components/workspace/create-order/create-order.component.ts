@@ -12,6 +12,8 @@ import {Schedule} from "../../../services/order/schedule";
 import {Buffer} from "buffer";
 import moment from "moment";
 import {OrderService} from "../../../services/order/order.service";
+import {HttpClient} from "@angular/common/http";
+import {PrimeNGConfig} from "primeng/api";
 
 
 @Component({
@@ -37,11 +39,20 @@ export class CreateOrderComponent implements OnInit {
   mailingLists: MailingList[];
 
   constructor(private formBuilder: FormBuilder,
-              private contactsService: ContactsService, private orderService: OrderService) {
+              private contactsService: ContactsService,
+              private orderService: OrderService,
+              private config: PrimeNGConfig,
+              private http: HttpClient) {
   }
 
   ngOnInit(): void {
-    this.minDate = moment(new Date()).add(2, 'm').toDate();
+    //перевод
+    this.http.get('assets/ru.json').subscribe((data: any) => {
+      this.config.setTranslation(data);
+    });
+    //
+
+    this.minDate = moment(new Date()).add(10, 'm').toDate();
     this.contactsService.fetch().subscribe(data => {
       this.mailingLists = data
     })
@@ -120,7 +131,7 @@ export class CreateOrderComponent implements OnInit {
     const mailingListId = value.dateFormGroup.clientListId
     let schedule;
     if (!this.selectDataVisible) {
-      schedule = new Schedule(moment(new Date()).add(2, 'minute').format("DD-MM-YYYY HH:mm"))
+      schedule = new Schedule(moment(new Date()).add(10, 'minute').format("DD-MM-YYYY HH:mm"))
     } else {
       schedule = new Schedule(moment(value.dateFormGroup.schedule).format("DD-MM-YYYY HH:mm"))
     }
