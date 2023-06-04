@@ -15,9 +15,12 @@ export class HeaderComponent implements OnInit {
   isScrolled: boolean = false;
   username: string;
 
+
   constructor(private service: TokenStorageService, private router: Router, private socialAuth: SocialAuthService) {
 
   }
+
+
 
   public getDecodedAccessToken(token: string | null): any {
     try {
@@ -33,15 +36,21 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+    this.socialAuth.signOut(true);
     this.service.signOut()
     this.router.navigate(['home'])
     this.isAuthorized = this.service.isAuthorized();
-    this.socialAuth.signOut();
+
+
   }
 
   ngOnInit(): void {
-    const s = this.getDecodedAccessToken(this.service.getToken());
-    this.username = s.sub;
+    if(this.service.getToken()!=null) {
+      const s = this.getDecodedAccessToken(this.service.getToken());
+      this.username = s.sub;
+    }
+
     this.isAuthorized = this.service.isAuthorized();
+
   }
 }

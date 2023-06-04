@@ -18,7 +18,21 @@
   <ng-template pTemplate="body"  let-order>
     <tr>
       <td>{{order.name}}</td>
-      <td [innerHTML]="order.template"></td>
+      <td >
+
+
+
+
+
+        <div class=" justify-content-center" >
+          <p-overlayPanel #op [baseZIndex]="1000000">
+            <ng-template pTemplate="content">
+              <iframe   width="450" height="400" [srcdoc]="order.template | safeHtml"  ></iframe>
+            </ng-template>
+          </p-overlayPanel>
+          <p-button (click)="op.toggle($event)" icon="pi pi-image" label="Show"></p-button>
+        </div>
+      </td>
       <td></td>
       <td>{{order.sendStartDate}}</td>
       <td>{{order.emailStatus}}</td>

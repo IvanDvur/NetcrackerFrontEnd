@@ -57,8 +57,11 @@ export class LoginComponent implements OnInit {
     });
 
     this.socialAuth.authState.subscribe((user) => {
-      console.log(user)
+
+      if(user!=null){
+      console.log("user = " +user)
       this.socialUser = user
+
       const tokenGoogle = new TokenDto(this.socialUser.idToken);
       this.authService.google(tokenGoogle).subscribe(
         res => {
@@ -67,6 +70,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/workspace']);
         }
       )
+      }
     })
   }
 

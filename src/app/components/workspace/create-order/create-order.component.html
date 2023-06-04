@@ -128,8 +128,10 @@
     <mat-step  *ngIf="isStarted">
       <ng-template matStepLabel>Подтверждение</ng-template>
         <div >
-        <p>Рассылка готова!.</p>
-        <div >
+        <p id="image-section">Рассылка готова!.</p>
+        <div  >
+
+          <iframe [srcdoc]="orderForm.value.emailFormGroup.template | safeHtml" ></iframe>
           <button class="btn btn-danger" (click)="singleStepper.reset()">Сброс</button>
           <button class="btn btn-success p-2"  style="color:black" type="submit">Создать</button>
         </div>
@@ -138,6 +140,7 @@
   </mat-stepper>
 
   </form>
+<!--  <button class="btn btn-danger" (click)="generateImage(orderForm.value.emailFormGroup.template)">ывыфвф</button>-->
 </div>
 
 

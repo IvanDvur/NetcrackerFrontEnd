@@ -23,8 +23,8 @@ export class ImportComponent implements OnInit {
     this.myFormGroup = this.formBuilder.group({name: [], file: []});
   }
 
-  showSuccess() {
-    this.messageService.add({sticky:true, severity: 'success', summary: 'Success', detail: 'Message Content'});
+  showSuccess(name:string) {
+    this.messageService.add({sticky:true, severity: 'success', summary: 'Готово!', detail: 'Список контактов '+'"'+name +'"'+' успешо добавлен.'});
   }
 
   showError() {
@@ -41,7 +41,7 @@ export class ImportComponent implements OnInit {
 
   public onClickSubmit(): void {
     if (this.myFormGroup.invalid || this.selectedFiles?.item(0) == null) {
-      alert('Invalid input');
+      this.showError()
       return;
     }
     const file: File | null = this.selectedFiles.item(0)
@@ -51,7 +51,9 @@ export class ImportComponent implements OnInit {
         .subscribe({
           next: res => {
             console.log('saved')
-            this.showSuccess()
+            this.showSuccess(this.myFormGroup.getRawValue().name)
+            this.myFormGroup.get('name').setValue('');
+            this.myFormGroup.get('file').setValue('');
           },
           error: err => {
             this.showError()

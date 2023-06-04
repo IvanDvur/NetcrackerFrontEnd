@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatStepper} from "@angular/material/stepper";
 import sampleTamplate from './src.json'
@@ -16,10 +16,12 @@ import {HttpClient} from "@angular/common/http";
 import {PrimeNGConfig} from "primeng/api";
 
 
+import * as htmlToImage from 'html-to-image';
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
-  styleUrls: ['./create-order.component.css']
+  styleUrls: ['./create-order.component.css'],
+
 })
 export class CreateOrderComponent implements OnInit {
 
@@ -123,7 +125,10 @@ export class CreateOrderComponent implements OnInit {
   resetEditor() {
   }
 
+
+
   onSubmit(value: any) {
+
     const encodedTemplate = Buffer.from(value.emailFormGroup.template).toString('base64')
     const topic = value.emailFormGroup.topic
     const image = null
