@@ -131,4 +131,12 @@ import {ToastModule} from "primeng/toast";
   bootstrap: [AppComponent]
 })
 
-export class AppModule {}
+export class AppModule {
+  ngOnInit(): void {
+    //перевод
+    this.http.get('assets/ru.json').subscribe((data: any) => {
+      this.config.setTranslation(data);
+    });
+  }
+
+}
