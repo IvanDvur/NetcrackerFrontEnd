@@ -48,11 +48,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //перевод
-    this.http.get('assets/ru.json').subscribe((data: any) => {
-      this.config.setTranslation(data);
-    });
-    //
+
 
     this.minDate = moment(new Date()).add(10, 'm').toDate();
     this.contactsService.fetch().subscribe(data => {
