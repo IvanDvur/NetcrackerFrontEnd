@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 import {WorkspaceComponent} from './components/workspace/workspace.component';
 import {HomeComponent} from './components/home/home.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {SidebarComponent} from './components/workspace/sidebar/sidebar.component';
 import {SidebarModule} from "primeng/sidebar";
@@ -20,7 +20,7 @@ import {PanelMenuModule} from "primeng/panelmenu";
 import {ImportComponent} from './components/workspace/import/import.component';
 import {CreateOrderComponent} from './components/workspace/create-order/create-order.component';
 import {ContactsComponent} from "./components/workspace/contacts/contacts.component";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {MatInputModule} from "@angular/material/input";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
@@ -53,6 +53,9 @@ import {MatSelectModule} from "@angular/material/select";
 import {TabViewModule} from "primeng/tabview";
 import { ActiveOrdersComponent } from './components/workspace/active-orders/active-orders.component';
 import {ToastModule} from "primeng/toast";
+import {ContactsService} from "./services/contacts/contacts.service";
+import {OrderService} from "./services/order/order.service";
+import {PrimeNGConfig} from "primeng/api";
 
 
 @NgModule({
@@ -131,4 +134,17 @@ import {ToastModule} from "primeng/toast";
   bootstrap: [AppComponent]
 })
 
-export class AppModule {}
+export class AppModule {
+  constructor(
+              private config: PrimeNGConfig,
+              private http: HttpClient) {
+  }
+
+  ngOnInit(): void {
+    //перевод
+    this.http.get('assets/ru.json').subscribe((data: any) => {
+      this.config.setTranslation(data);
+    });
+  }
+
+}
