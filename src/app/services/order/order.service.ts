@@ -19,7 +19,6 @@ export class OrderService {
 
   private postOrderURL = 'http://localhost:8080/order/add'
   private activeOrdersURL = 'http://localhost:8080/order/active'
-  private finishedOrdersURL = 'http://localhost:8080/order/done'
 
   constructor(private http: HttpClient) {
 

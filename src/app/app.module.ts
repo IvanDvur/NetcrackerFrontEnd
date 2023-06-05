@@ -56,6 +56,8 @@ import {ToastModule} from "primeng/toast";
 import {ContactsService} from "./services/contacts/contacts.service";
 import {OrderService} from "./services/order/order.service";
 import {PrimeNGConfig} from "primeng/api";
+import {SafeHtmlPipe} from "./components/workspace/create-order/safe-html.pipe";
+import {OverlayPanelModule} from "primeng/overlaypanel";
 
 
 @NgModule({
@@ -72,52 +74,54 @@ import {PrimeNGConfig} from "primeng/api";
     RegistrationComponent,
     NotFoundComponent,
     ActiveOrdersComponent,
+    SafeHtmlPipe
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        MatDialogModule,
-        SidebarModule,
-        ButtonModule,
-        SlideMenuModule,
-        MenuModule,
-        MatIconModule,
-        MatStepperModule,
-        MatToolbarModule,
-        MatListModule,
-        MatSidenavModule,
-        PanelMenuModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        MatDialogModule,
-        MatInputModule,
-        MatDatepickerModule,
-        MatMomentDateModule,
-        MatCheckboxModule,
-        FileUploadModule,
-        CommonModule,
-        MatRadioModule,
-        TableModule,
-        TagModule,
-        DropdownModule,
-        MultiSelectModule,
-        SliderModule,
-        InputTextModule,
-        RippleModule,
-        EmailEditorModule,
-        StyleClassModule,
-        SocialLoginModule,
-        GoogleSigninButtonModule,
-        CalendarModule,
-        DialogModule,
-        MatTabsModule,
-        MatOptionModule,
-        MatSelectModule,
-        TabViewModule,
-        ToastModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MatDialogModule,
+    SidebarModule,
+    ButtonModule,
+    SlideMenuModule,
+    MenuModule,
+    MatIconModule,
+    MatStepperModule,
+    MatToolbarModule,
+    MatListModule,
+    MatSidenavModule,
+    PanelMenuModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatCheckboxModule,
+    FileUploadModule,
+    CommonModule,
+    MatRadioModule,
+    TableModule,
+    TagModule,
+    DropdownModule,
+    MultiSelectModule,
+    SliderModule,
+    InputTextModule,
+    RippleModule,
+    EmailEditorModule,
+    StyleClassModule,
+    SocialLoginModule,
+    GoogleSigninButtonModule,
+    CalendarModule,
+    DialogModule,
+    MatTabsModule,
+    MatOptionModule,
+    MatSelectModule,
+    TabViewModule,
+    ToastModule,
+    OverlayPanelModule,
+  ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
     useValue: {
@@ -135,16 +139,5 @@ import {PrimeNGConfig} from "primeng/api";
 })
 
 export class AppModule {
-  constructor(
-              private config: PrimeNGConfig,
-              private http: HttpClient) {
-  }
-
-  ngOnInit(): void {
-    //перевод
-    this.http.get('assets/ru.json').subscribe((data: any) => {
-      this.config.setTranslation(data);
-    });
-  }
 
 }

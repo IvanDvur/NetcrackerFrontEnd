@@ -24,8 +24,9 @@ export class ContactsComponent {
   }
 
   ngOnInit() {
-
-
+    this.http.get('assets/ru.json').subscribe((data: any) => {
+      this.config.setTranslation(data);
+    });
     this.fetchMailingLists()
     console.log(this.mailingLists)
   }

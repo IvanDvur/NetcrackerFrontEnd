@@ -6,7 +6,6 @@ import {OrderDTO} from "./orderDTO";
   selector: 'app-active-orders',
   templateUrl: './active-orders.component.html',
   styleUrls: ['./active-orders.component.css'],
-  encapsulation: ViewEncapsulation.Emulated,
 })
 export class ActiveOrdersComponent implements OnInit{
 

@@ -20,11 +20,9 @@ export class TokenStorageService {
 
   }
 
-
   public getToken():string|null{
     return sessionStorage.getItem(TOKEN_KEY);
   }
-
   public isAuthorized():boolean{
     return sessionStorage.getItem(TOKEN_KEY)!=null;
   }

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatStepper} from "@angular/material/stepper";
 import sampleTamplate from './src.json'
@@ -16,7 +16,6 @@ import {HttpClient} from "@angular/common/http";
 import {PrimeNGConfig} from "primeng/api";
 
 
-import * as htmlToImage from 'html-to-image';
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
@@ -48,12 +47,12 @@ export class CreateOrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-
     this.minDate = moment(new Date()).add(10, 'm').toDate();
     this.contactsService.fetch().subscribe(data => {
       this.mailingLists = data
     })
+
+
     this.orderForm = new FormGroup({
       emailFormGroup: new FormGroup({
         topic: new FormControl('', Validators.required),
@@ -121,10 +120,7 @@ export class CreateOrderComponent implements OnInit {
   resetEditor() {
   }
 
-
-
   onSubmit(value: any) {
-
     const encodedTemplate = Buffer.from(value.emailFormGroup.template).toString('base64')
     const topic = value.emailFormGroup.topic
     const image = null
@@ -136,7 +132,6 @@ export class CreateOrderComponent implements OnInit {
     } else {
       schedule = new Schedule(moment(value.dateFormGroup.schedule).format("DD-MM-YYYY HH:mm"))
     }
-
     let sendTypes = "";
     if (this.emailStepperV) {
       sendTypes = sendTypes.concat("EMAIL,")

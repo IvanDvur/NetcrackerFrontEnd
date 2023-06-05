@@ -27,13 +27,7 @@ h1{
 .margin-0 {
   margin: 0;
 }
-.container-upload{
-  padding: 15px;
-  background-color: white;
-  border-radius: 15px;
-  width: 50%;
-  height: 50%
-}
+
 
 label{
   font-size: 18px;
