@@ -11,3 +11,5 @@ h1{
   font-size: 32px;
   font-weight: bold;
 }
+.d-none {display: none}
+.d-block {display: block}

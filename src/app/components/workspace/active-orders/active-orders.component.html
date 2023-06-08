@@ -49,10 +49,11 @@
               <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
             </div>
           </th>
-          <th style="min-width:15rem; background-color: white">
+          <th pSortableColumn="sendStartDate" style="min-width:15rem; background-color: white">
             <div class="flex align-items-center">
               Дата начала отправки
-              <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+              <p-sortIcon field="sendStartDate"></p-sortIcon>
+              <p-columnFilter type="text" field="sendStartDate" display="menu"></p-columnFilter>
             </div>
           </th>
           <th style="min-width:15rem; background-color: white">
@@ -84,8 +85,8 @@
           </td>
           <td>{{order.clientListName}}</td>
           <td>{{order.sendStartDate}}</td>
-          <td>{{order.emailStatus}}</td>
-          <td>{{order.smsStatus}}</td>
+          <td><p-tag [value] ='order.emailStatus' [style]="getSeverity(order.emailStatus)"></p-tag></td>
+          <td><p-tag [value] ='order.smsStatus'  [style]="getSeverity(order.smsStatus)"></p-tag></td>
         </tr>
       </ng-template>
     </p-table>

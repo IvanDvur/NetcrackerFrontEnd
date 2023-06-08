@@ -30,4 +30,22 @@ export class ActiveOrdersComponent implements OnInit{
   clear(table: Table) {
     table.clear();
   }
+
+  getSeverity(status: string):any {
+    switch (status) {
+      case 'Ожидает отправки':
+        return {'background': '#3B82F6'};
+      case 'Обрабатывается'|| 'В процессе рассылки':
+        return {'background':'linear-gradient(-225deg,#AC32E4 0%,#7918F2 48%,#4801FF 100%)'};
+      case 'Доставлено':
+        return {'background':'green'};
+      case 'Ошибка сервера':
+        return {'background':'red'};
+      case 'Отложено':
+        return {'background':'#F59E0B'}
+      case '-':
+        return {'background':'grey'}
+    }
+  }
+
 }
