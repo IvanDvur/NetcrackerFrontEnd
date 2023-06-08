@@ -1,0 +1,23 @@
+<p-tabView class="w-1/2">
+  <p-tabPanel header="Из файла">
+    <ng-container [formGroup]="this.myFormGroup">
+      <div class="bs-callout bs-callout-orange bs-callout-sm m-3">
+        Поддерживаемые форматы: CSV, XLS, XLSX
+      </div>
+      <div class="flex flex-col gap-2 m-3">
+        <label htmlFor="name" style="font-weight: lighter;">Название</label>
+        <input type="text" aria-describedby="name-help" class="p-inputtext w-1/2" id="name" formControlName="name"/>
+        <small id="name-help">Назовите свой список</small>
+      </div>
+      <div class="m-3">
+        <input type="file" class="p-fileupload" (change)="selectFile($event)" accept=".csv"
+               formControlName="file">
+      </div>
+      <div>
+        <p-button class="p-button-success m-3" (click)="onClickSubmit()">Создать</p-button>
+      </div>
+    </ng-container>
+  </p-tabPanel>
+  <p-tabPanel header="Вручную">
+  </p-tabPanel>
+</p-tabView>

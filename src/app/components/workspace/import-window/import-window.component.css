@@ -1,0 +1,21 @@
+
+
+.bs-callout {
+  color: #666;
+  padding: 15px;
+  border-left: 3px solid #eee;
+}
+
+.bs-callout-orange {
+  background-color: lightskyblue;
+  border-color: dodgerblue;
+  width: 50%;
+}
+
+.bs-callout-sm {
+  padding: 8px 12px;
+}
+
+label{
+  font-size: 18px;
+}
