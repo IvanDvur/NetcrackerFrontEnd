@@ -1,20 +1,72 @@
 <div class="container pl-3.5">
-  <div class="container-contacts">
-    <p-table [value]="activeOrders" [tableStyle]="{'min-width': '70rem'}">
+  <h1>Мои заявки</h1>
+  <div class="container-contacts mt-5">
+    <p-table [tableStyle]="{'min-width': '70rem'}"
+             #dt2
+             [value]="activeOrders"
+             dataKey="id"
+             [rows]="6"
+             [showCurrentPageReport]="true"
+             [rowsPerPageOptions]="[4,5,6]"
+             [paginator]="true"
+             currentPageReportTemplate="Отображается с {first} по {last} из {totalRecords} записей"
+             [globalFilterFields]="['name', 'emailStatus','smsStatus']">>
       <ng-template pTemplate="caption">
-        <div class="flex align-items-center justify-content-between">
-          Products
-          <p-button icon="pi pi-refresh"></p-button>
+        <div class="d-flex flex-row">
+          <div class="col-10">
+            <button pButton label="Очистить" class="p-button-outlined" icon="pi pi-filter-slash"
+                    (click)="clear(dt2)"></button>
+          </div>
+          <div class="mr-5">
+          <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" class="form-control"
+                       (input)="dt2.filterGlobal(applyFilterGlobal($event), 'contains')" placeholder="Поиск"/>
+            </span>
+          </div>
+          <div>
+            <p-button icon="pi pi-refresh"></p-button>
+          </div>
+
         </div>
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th>Имя рассылки</th>
-          <th>Шаблон</th>
-          <th>Список клиентов</th>
-          <th>Дата начала отправки</th>
-          <th>Статус Email рассылки</th>
-          <th>Статус Sms рассылки</th>
+          <th style="min-width:15rem; background-color: white">
+            <div class="flex align-items-center">
+              Имя заявки
+              <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:15rem; background-color: white">
+            <div class="flex align-items-center">
+              Шаблон
+            </div>
+          </th>
+          <th style="min-width:15rem; background-color: white">
+            <div class="flex align-items-center">
+              Список клиентов
+              <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:15rem; background-color: white">
+            <div class="flex align-items-center">
+              Дата начала отправки
+              <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:15rem; background-color: white">
+            <div class="flex align-items-center">
+              Статус Email рассылки
+              <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:15rem; background-color: white">
+            <div class="flex align-items-center">
+              Статус СМС рассылки
+              <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+            </div>
+          </th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-order>
@@ -27,10 +79,10 @@
                   <iframe width="450" height="400" [srcdoc]="order.template | safeHtml"></iframe>
                 </ng-template>
               </p-overlayPanel>
-              <p-button (click)="op.toggle($event)" icon="pi pi-image" label="Show"></p-button>
+              <p-button (click)="op.toggle($event)" icon="pi pi-image" label="Шаблон"></p-button>
             </div>
           </td>
-          <td></td>
+          <td>{{order.clientListName}}</td>
           <td>{{order.sendStartDate}}</td>
           <td>{{order.emailStatus}}</td>
           <td>{{order.smsStatus}}</td>

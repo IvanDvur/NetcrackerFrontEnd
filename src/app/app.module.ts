@@ -53,11 +53,10 @@ import {MatSelectModule} from "@angular/material/select";
 import {TabViewModule} from "primeng/tabview";
 import { ActiveOrdersComponent } from './components/workspace/active-orders/active-orders.component';
 import {ToastModule} from "primeng/toast";
-import {ContactsService} from "./services/contacts/contacts.service";
-import {OrderService} from "./services/order/order.service";
-import {PrimeNGConfig} from "primeng/api";
 import {SafeHtmlPipe} from "./components/workspace/create-order/safe-html.pipe";
 import {OverlayPanelModule} from "primeng/overlaypanel";
+import { ImportWindowComponent } from './components/workspace/import-window/import-window.component';
+
 
 
 @NgModule({
@@ -74,7 +73,8 @@ import {OverlayPanelModule} from "primeng/overlaypanel";
     RegistrationComponent,
     NotFoundComponent,
     ActiveOrdersComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    ImportWindowComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,6 @@
 import {FullOrderForm, OrderForm} from "../../../services/order/order-model";
-import * as htmlToImage from 'html-to-image';
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 import {Buffer} from "buffer";
+import {TranslationService} from "../../../services/translation/translation.service";
 
 export class OrderDTO{
   orderName:string
@@ -17,8 +16,8 @@ export class OrderDTO{
     this.template = decodedHtml;
     this.clientListName = order.mailingList.name
     this.sendStartDate = order.schedule[0].timeToSend;
-    this.emailStatus = order.schedule[0].emailStatus;
-    this.smsStatus = order.schedule[0].smsStatus;
+    this.emailStatus = TranslationService.translate(order.schedule[0].emailStatus);
+    this.smsStatus = TranslationService.translate(order.schedule[0].smsStatus);
   }
 
 }

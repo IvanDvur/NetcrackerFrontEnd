@@ -1,6 +1,6 @@
 <div>
   <div class="generalHeader" [class.scroll]="isScrolled">
-    <div class="name" >
+    <div class="name">
       <img class="logo" src="../assets/logo.png" alt="Лого">
       <a class="name" href="/home">Sender</a>
     </div>
@@ -8,14 +8,16 @@
       <a routerLink="/login">
         <button class="btn btn-success">Вход</button>
       </a>
-      <button routerLink="/register" class="btn btn-danger" >Регистрация</button>
+      <button routerLink="/register" class="btn btn-danger">Регистрация</button>
     </div>
-    <div  *ngIf="isAuthorized">
-      <div class="auth-buttons" >
-        <span class="text-white ">
-          {{username}}
+    <div *ngIf="isAuthorized">
+      <div class="auth-buttons">
+        <span>
+          <p-button styleClass="p-button-raised p-button-success" class="mr-4" routerLink='workspace/import'>{{username}}</p-button>
      </span>
-        <button (click)="logout()" class="btn btn-danger">Выйти<i class="pi pi-pf pi- pi-sign-out ml-3"></i></button>
+        <p-button (click)="logout()" styleClass="p-button-raised p-button-danger">Выйти<i
+          class="pi pi-pf pi- pi-sign-out ml-3"></i></p-button>
+
       </div>
     </div>
   </div>

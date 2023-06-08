@@ -5,6 +5,7 @@
       рассылка
     </button>
   </div>
+  <p-toast [baseZIndex]="1000000" position="top-right"></p-toast>
   <mat-radio-group *ngIf="!isStarted">
     <div class="box">
       <mat-checkbox (change)="selectSms()">Sms рассылка</mat-checkbox>
@@ -13,6 +14,8 @@
       <mat-checkbox (change)="selectEmail()">Email рассылка</mat-checkbox>
     </div>
     <button class="btn btn-success" (click)="start()">Начать</button>
+    <button (click)="restoreSession()" class="btn btn-info">Продолжить с того же места</button>
+
 
   </mat-radio-group>
   <form [formGroup]="orderForm"  (ngSubmit)="onSubmit(orderForm.value)">
@@ -111,10 +114,11 @@
         </div>
         <div class="row">
           <h2>Выберите клиентов, которым хотите разослать сообщения</h2>
+
           <mat-form-field>
             <mat-label>Выберите группу клиентов из выпадающего списка</mat-label>
             <mat-select  formControlName="clientListId" required>
-              <mat-option routerLink="/workspace/import">Добавить список</mat-option>
+              <mat-option (click)="showDialog()">Добавить список</mat-option>
               <mat-option *ngFor="let list of mailingLists" [value]="list.id">
                 {{list.name}}
               </mat-option>
@@ -122,6 +126,10 @@
             <!--            <mat-error *ngIf="fourFormGroup.hasError('required')">Пожалуйста, выберите список клиентов</mat-error>-->
             <!--            <mat-hint>Вы отправите сообщения клиентам из списка "{{mailingLists.values?.name}}"</mat-hint>-->
           </mat-form-field>
+
+          <p-dialog header="Импорт контактов" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" (onHide)="fetchLists()" [resizable]="false">
+            <app-import-window></app-import-window>
+          </p-dialog>
         </div>
       </form>
     </mat-step>
@@ -129,9 +137,8 @@
       <ng-template matStepLabel>Подтверждение</ng-template>
         <div >
         <p id="image-section">Рассылка готова!.</p>
-        <div  >
-
-          <iframe [srcdoc]="orderForm.value.emailFormGroup.template | safeHtml" ></iframe>
+        <div>
+          <iframe width="300" height="500" scrolling="no" [srcdoc]="orderForm.value.emailFormGroup.template | safeHtml" ></iframe>
           <button class="btn btn-danger" (click)="singleStepper.reset()">Сброс</button>
           <button class="btn btn-success p-2"  style="color:black" type="submit">Создать</button>
         </div>

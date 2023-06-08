@@ -13,14 +13,15 @@ import {Buffer} from "buffer";
 import moment from "moment";
 import {OrderService} from "../../../services/order/order.service";
 import {HttpClient} from "@angular/common/http";
-import {PrimeNGConfig} from "primeng/api";
+import {MessageService, PrimeNGConfig} from "primeng/api";
+import {ImportService} from "../../../services/import/import.service";
 
 
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
   styleUrls: ['./create-order.component.css'],
-
+  providers: [MessageService]
 })
 export class CreateOrderComponent implements OnInit {
 
@@ -28,6 +29,8 @@ export class CreateOrderComponent implements OnInit {
   @ViewChild(EmailEditorComponent)
   private emailEditor: EmailEditorComponent
   orderForm: FormGroup;
+  importForm: FormGroup
+  sessionData: any = {}
   orderRequest: OrderForm;
   selectDataVisible: boolean;
   private text!: string;
@@ -38,21 +41,41 @@ export class CreateOrderComponent implements OnInit {
   private chooseDate: any;
   private valid: boolean;
   mailingLists: MailingList[];
+  visible: boolean;
 
   constructor(private formBuilder: FormBuilder,
               private contactsService: ContactsService,
               private orderService: OrderService,
-              private config: PrimeNGConfig,
-              private http: HttpClient) {
+              private messageService: MessageService,
+              private importService: ImportService) {
+  }
+
+  showSuccess() {
+    this.messageService.add({
+      sticky: true,
+      severity: 'success',
+      summary: 'Готово!',
+      detail: 'Заявка на рассылку успешно отправлена'
+    });
+  }
+
+  showError() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Ошибка',
+      detail: 'Упс! Ошибка соединения с сервером. Попробуйте позже'
+    });
+  }
+
+  saveState() {
+    this.sessionData = Object.assign(this.sessionData, this.orderForm.value)
+    console.log(this.sessionData)
+    sessionStorage.setItem('orderForm', JSON.stringify(this.sessionData))
   }
 
   ngOnInit(): void {
     this.minDate = moment(new Date()).add(10, 'm').toDate();
-    this.contactsService.fetch().subscribe(data => {
-      this.mailingLists = data
-    })
-
-
+    this.fetchLists()
     this.orderForm = new FormGroup({
       emailFormGroup: new FormGroup({
         topic: new FormControl('', Validators.required),
@@ -86,7 +109,6 @@ export class CreateOrderComponent implements OnInit {
       }
     );
   }
-
 
   onChooseDate(event: Event) {
     this.selectDataVisible = true;
@@ -145,6 +167,32 @@ export class CreateOrderComponent implements OnInit {
       new SmsAdvertisement(textSms),
       mailingListId, sendTypes, [schedule])
     console.log(this.orderRequest)
-    this.orderService.postOrder(this.orderRequest).subscribe()
+    this.orderService.postOrder(this.orderRequest).subscribe({
+      next: res => {
+        this.showSuccess()
+        this.ngOnInit()
+      },
+      error: err => {
+        this.showError();
+      }
+    })
+  }
+
+  restoreSession() {
+
+  }
+
+  showDialog() {
+    this.visible = true;
+  }
+
+  fetchLists() {
+    this.contactsService.fetch().subscribe({
+      next: data => {
+        this.mailingLists = data
+      }, error: err => {
+        this.showError()
+      }
+    })
   }
 }

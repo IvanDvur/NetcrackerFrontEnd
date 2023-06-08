@@ -17,7 +17,6 @@ export class ContactsComponent {
 
   mailingLists: MailingList[];
 
-
   constructor(private contactsService: ContactsService,
               private config: PrimeNGConfig,
               private http: HttpClient) {

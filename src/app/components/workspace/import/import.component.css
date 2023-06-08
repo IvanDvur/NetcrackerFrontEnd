@@ -5,50 +5,6 @@ h1{
 :host ::ng-deep .p-toast-top-right{
   top: 100px
 }
-.p-toast-success{
-  margin-top: 200px;
-}
-.bs-callout {
-  color: #666;
-  padding: 15px;
-  border-left: 3px solid #eee;
-}
-
-.bs-callout-orange {
-  background-color: lightskyblue;
-  border-color: dodgerblue;
-  width: 50%;
-}
-
-.bs-callout-sm {
-  padding: 8px 12px;
-}
-
-.margin-0 {
-  margin: 0;
-}
-
-
-label{
-  font-size: 18px;
-}
-
-.topic{
-  letter-spacing: 2px;
-  font-weight: bold;
-  font-size: 22px;
-}
-
-.button{
-  flex-wrap: wrap;
-  background-color: #ed3e3e;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-  transition: background-color 0.3s, color 0.3s;
-}
 .container-contacts{
   padding: 15px;
   background-color: white;

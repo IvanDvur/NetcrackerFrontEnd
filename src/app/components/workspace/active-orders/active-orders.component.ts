@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {OrderService} from "../../../services/order/order.service";
 import {OrderDTO} from "./orderDTO";
+import {Table} from "primeng/table";
 
 @Component({
   selector: 'app-active-orders',
@@ -20,5 +21,13 @@ export class ActiveOrdersComponent implements OnInit{
       console.log(data)
     })
     console.log(this.activeOrders)
+  }
+
+  applyFilterGlobal(event: any) {
+    return event.target.value;
+  }
+
+  clear(table: Table) {
+    table.clear();
   }
 }

@@ -1,8 +1,9 @@
-.logo{
+.logo {
   flex-wrap: wrap;
   width: 50px;
   height: 50px;
 }
+
 .name {
   transition: color 0.3s, color 0.3s;
   margin-left: 5%;
@@ -13,6 +14,7 @@
   font-weight: bold;
   color: white;
 }
+
 .auth-buttons button {
   flex-wrap: wrap;
   border: none;
@@ -33,8 +35,9 @@
   left: 0;
   right: 0;
   align-items: center;
-  background-color:#064f95;
+  background-color: #064f95;
   padding: 20px;
   z-index: 9999;
   color: #000000;
 }
+

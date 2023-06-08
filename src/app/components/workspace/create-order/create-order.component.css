@@ -51,11 +51,13 @@
   background-color: #bb2d3b;
 }
 
-
-
 :host ::ng-deep .mat-horizontal-content-container {
   padding:0 !important;
   height: 900px;
   position: relative;
   top:0px;
+}
+
+:host ::ng-deep .p-toast-top-right{
+  top: 100px
 }
