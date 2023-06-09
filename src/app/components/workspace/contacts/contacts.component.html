@@ -53,7 +53,9 @@
             {{ mailingList.quantityOfClients}}
           </td>
           <td class="text-center">
-            <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-c p-button-text"></p-button>
+            <a [routerLink]="['/workspace/contacts',mailingList.id]">
+              <p-button  icon="pi pi-pencil" styleClass="p-button-rounded p-button-c p-button-text"></p-button>
+             </a>
             <p-button (onClick)="deleteMailingList(mailingList.id)" icon="pi pi-times" styleClass="p-button-rounded p-button-danger p-button-text"></p-button>
           </td>
         </tr>

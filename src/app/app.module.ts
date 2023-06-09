@@ -56,6 +56,13 @@ import {ToastModule} from "primeng/toast";
 import {SafeHtmlPipe} from "./components/workspace/create-order/safe-html.pipe";
 import {OverlayPanelModule} from "primeng/overlaypanel";
 import { ImportWindowComponent } from './components/workspace/import-window/import-window.component';
+import { ContactComponent } from './components/workspace/contact/contact.component';
+import {RadioButtonModule} from "primeng/radiobutton";
+import {RatingModule} from "primeng/rating";
+import {ToolbarModule} from "primeng/toolbar";
+import {InputNumberModule} from "primeng/inputnumber";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {InputTextareaModule} from "primeng/inputtextarea";
 
 
 
@@ -75,6 +82,7 @@ import { ImportWindowComponent } from './components/workspace/import-window/impo
     ActiveOrdersComponent,
     SafeHtmlPipe,
     ImportWindowComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
@@ -121,6 +129,12 @@ import { ImportWindowComponent } from './components/workspace/import-window/impo
     TabViewModule,
     ToastModule,
     OverlayPanelModule,
+    RadioButtonModule,
+    RatingModule,
+    ToolbarModule,
+    InputNumberModule,
+    ConfirmDialogModule,
+    InputTextareaModule,
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
