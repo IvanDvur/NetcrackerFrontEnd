@@ -14,10 +14,9 @@
       <mat-checkbox (change)="selectEmail()">Email рассылка</mat-checkbox>
     </div>
     <button class="btn btn-success" (click)="start()">Начать</button>
-    <button (click)="restoreSession()" class="btn btn-info">Продолжить с того же места</button>
-
-
   </mat-radio-group>
+
+
   <form [formGroup]="orderForm"  (ngSubmit)="onSubmit(orderForm.value)">
   <mat-stepper #singleStepper *ngIf="isStarted" [linear]="true">
     <mat-step [stepControl]="orderForm.get('emailFormGroup')" *ngIf="emailStepperV && isStarted">

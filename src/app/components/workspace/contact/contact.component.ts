@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ConfirmationService, MessageService} from "primeng/api";
 import {ContactsService} from "../../../services/contacts/contacts.service";
-import {Clients} from "../contacts/mailingList";
+import {Client} from "../contacts/mailingList";
 import {ActivatedRoute, Params} from "@angular/router";
-
 
 
 @Component({
@@ -12,34 +11,38 @@ import {ActivatedRoute, Params} from "@angular/router";
   styleUrls: ['./contact.component.css'],
   providers: [MessageService, ConfirmationService]
 })
-
-export class ContactComponent implements OnInit
-{
+export class ContactComponent implements OnInit {
   constructor(private contactService: ContactsService,
               private messageService: MessageService,
               private confirmationService: ConfirmationService,
-              private route:ActivatedRoute) {
+              private route: ActivatedRoute) {
   }
+
   ngOnInit(): void {
     this.fetchClient()
-
   }
 
-  fetchClient(){
-    this.route.params.subscribe((params:Params)=>{
+  fetchClient() {
+    this.route.params.subscribe((params: Params) => {
       console.log(params?.['id'])
-      this.contactService.fetchMailingListById(params?.['id']).subscribe(data=>{
-        this.clients=data.clients
+      this.contactService.fetchMailingListById(params?.['id']).subscribe(data => {
+        this.clients = data.clients
+        this.mailingListId = data.id
+        this.mailingListName = data.name
       })
     })
   }
+
+  mailingListId: string
+  mailingListName: string
   clientDialog: boolean;
+  editClientFlag: boolean
+  addClientFlag: boolean
+  clients: Client[];
 
-  clients: Clients[];
+  client: Client;
 
-  client: Clients;
-
-  selectedProducts: Clients[];
+  selectedClients: Client[];
 
   submitted: boolean;
 
@@ -47,40 +50,34 @@ export class ContactComponent implements OnInit
 
   openNew() {
     this.client = {};
+    this.addClientFlag = true
+    this.editClientFlag = false
     this.submitted = false;
     this.clientDialog = true;
   }
 
-  deleteSelectedProducts() {
-    // this.confirmationService.confirm({
-    //   message: 'Are you sure you want to delete the selected products?',
-    //   header: 'Confirm',
-    //   icon: 'pi pi-exclamation-triangle',
-    //   accept: () => {
-    //     this.products = this.products.filter((val) => !this.selectedProducts.includes(val));
-    //     this.selectedProducts = null;
-    //     this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
-    //   }
-    // });
+  deleteSelectedClients() {
+
   }
 
-  editClient(client: Clients) {
-    this.client = { ...client };
+  editClient(client: Client) {
+    this.editClientFlag = true
+    this.addClientFlag = false
+    this.client = {...client};
     this.clientDialog = true;
   }
 
-  deleteClient(client: Clients) {
+  deleteClient(client: Client) {
     this.confirmationService.confirm({
       message: 'Вы действительно хотите удалить этот контакт?',
       header: 'Подтверждение',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-       this.contactService.deleteClient(client.id).subscribe(data=>{
-         this.messageService.add({ severity: 'success', summary: 'Успех', detail: 'Контакт удален', life: 3000 });
-         this.fetchClient()
-       })
+        this.contactService.deleteClient(client.id).subscribe(data => {
+          this.messageService.add({severity: 'success', summary: 'Успех', detail: 'Контакт удален', life: 3000});
+          this.fetchClient()
+        })
         this.client = {};
-
       }
     });
   }
@@ -89,33 +86,33 @@ export class ContactComponent implements OnInit
     this.clientDialog = false;
     this.submitted = false;
   }
+
   updateClients() {
     this.submitted = true;
-    this.contactService.updateClient(this.client).subscribe(data=>{
-      this.messageService.add({ severity: 'success', summary: 'Успех', detail: 'Контакт обновлен', life: 3000 });
-      this.clientDialog = false;
-      this.fetchClient()
-    });
+    this.contactService.updateClient(this.client).subscribe(
+      data => {
+        this.messageService.add({severity: 'success', summary: 'Успех', detail: 'Контакт обновлен', life: 3000});
+        this.clientDialog = false;
+        this.fetchClient()
+      });
     this.client = {};
   }
-  saveProduct() {
-    // this.submitted = true;
-    //
-    // if (this.client.firstName.trim()) {
-    //   if (this.product.id) {
-    //     this.clients[this.findIndexById(this.product.id)] = this.product;
-    //
-    //   } else {
-    //     this.product.id = this.createId();
-    //     this.product.image = 'product-placeholder.svg';
-    //     this.clients.push(this.product);
-    //    // this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
-    //   }
-    //
-    //   this.clients = [...this.clients];
-    //   this.productDialog = false;
-    //   this.product = {};
-    // }
+
+  saveClient() {
+    this.contactService.saveClient(this.client, this.mailingListId).subscribe({
+        next: res => {
+          this.messageService.add({severity: 'success', summary: 'Успех', detail: 'Контакт добавлен в список'})
+          this.fetchClient()
+        },
+        error: err => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Ошибка',
+            detail: 'Не смогли добавить контакт. Обновите страницу или попробуйте позже'
+          })
+        }
+      }
+    )
   }
 
   findIndexById(id: string): number {
@@ -129,27 +126,4 @@ export class ContactComponent implements OnInit
 
     return index;
   }
-
-  createId(): string {
-    let id = '';
-    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (var i = 0; i < 5; i++) {
-      id += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return id;
-  }
-
-  getSeverity(status: string):any {
-    switch (status) {
-      case 'INSTOCK':
-        return 'success';
-      case 'LOWSTOCK':
-        return 'warning';
-      case 'OUTOFSTOCK':
-        return 'danger';
-    }
-  }
-
-
-
 }

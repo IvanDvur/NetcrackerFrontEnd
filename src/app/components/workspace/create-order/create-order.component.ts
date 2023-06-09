@@ -67,12 +67,6 @@ export class CreateOrderComponent implements OnInit {
     });
   }
 
-  saveState() {
-    this.sessionData = Object.assign(this.sessionData, this.orderForm.value)
-    console.log(this.sessionData)
-    sessionStorage.setItem('orderForm', JSON.stringify(this.sessionData))
-  }
-
   ngOnInit(): void {
     this.minDate = moment(new Date()).add(10, 'm').toDate();
     this.fetchLists()
@@ -176,10 +170,6 @@ export class CreateOrderComponent implements OnInit {
         this.showError();
       }
     })
-  }
-
-  restoreSession() {
-
   }
 
   showDialog() {

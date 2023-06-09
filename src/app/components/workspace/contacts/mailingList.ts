@@ -7,12 +7,12 @@ export interface MailingList {
 export interface MailingListDto {
   id?:string;
   name?:string;
-  clients:Clients[]
+  clients:Client[]
 
 
 
 }
-export interface Clients{
+export interface Client{
   id?: string;
   firstName?: string;
   lastName?: string;
