@@ -18,11 +18,10 @@
                     (click)="clear(dt1)"></button>
           </div>
           <div>
-              <span class="p-input-icon-left ml-auto">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" class="form-control"
-                           (input)="dt1.filterGlobal(applyFilterGlobal($event), 'contains')" placeholder="Поиск"/>
-                </span>
+          <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" class="form-control" (input)="dt1.filterGlobal(applyFilterGlobal($event), 'contains')" placeholder="Поиск"/>
+            </span>
           </div>
         </div>
       </ng-template>
@@ -54,9 +53,10 @@
             {{ mailingList.quantityOfClients}}
           </td>
           <td class="text-center">
-            <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-c p-button-text"></p-button>
-            <p-button (onClick)="deleteMailingList(mailingList.id)" icon="pi pi-times"
-                      styleClass="p-button-rounded p-button-danger p-button-text"></p-button>
+            <a [routerLink]="['/workspace/contacts',mailingList.id]">
+              <p-button  icon="pi pi-pencil" styleClass="p-button-rounded p-button-c p-button-text"></p-button>
+             </a>
+            <p-button (onClick)="deleteMailingList(mailingList.id)" icon="pi pi-times" styleClass="p-button-rounded p-button-danger p-button-text"></p-button>
           </td>
         </tr>
       </ng-template>
@@ -70,6 +70,3 @@
     </p-table>
   </div>
 </div>
-
-
-

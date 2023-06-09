@@ -11,6 +11,7 @@ import {NotFoundComponent} from "./components/not-found/not-found.component";
 
 import {canActivate, canActivateChild} from "./auth.guardTest";
 import {ActiveOrdersComponent} from "./components/workspace/active-orders/active-orders.component";
+import {ContactComponent} from "./components/workspace/contact/contact.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -22,8 +23,10 @@ const routes: Routes = [
     children: [
       {path: 'import', component: ImportComponent},
       {path: 'contacts', component: ContactsComponent},
+      {path: 'contacts/:id',component:ContactComponent},
       {path: 'create-order', component: CreateOrderComponent},
-      {path: 'active-orders', component: ActiveOrdersComponent}
+      {path: 'active-orders', component: ActiveOrdersComponent},
+
     ]
   },
   {path: 'login', component: LoginComponent},
