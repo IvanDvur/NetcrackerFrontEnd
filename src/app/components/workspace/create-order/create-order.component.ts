@@ -150,7 +150,7 @@ export class CreateOrderComponent implements OnInit {
     const mailingListId = value.dateFormGroup.clientListId
     let schedule;
     if (!this.selectDataVisible) {
-      schedule = new Schedule(moment(new Date()).add(10, 'minute').format("DD-MM-YYYY HH:mm"))
+      schedule = new Schedule(moment(new Date()).add(1, 'minute').format("DD-MM-YYYY HH:mm"))
     } else {
       schedule = new Schedule(moment(value.dateFormGroup.schedule).format("DD-MM-YYYY HH:mm"))
     }

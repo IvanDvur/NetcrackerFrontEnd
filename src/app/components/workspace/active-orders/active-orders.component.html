@@ -53,16 +53,15 @@
             <div class="flex align-items-center">
               Дата начала отправки
               <p-sortIcon field="sendStartDate"></p-sortIcon>
-              <p-columnFilter type="text" field="sendStartDate" display="menu"></p-columnFilter>
             </div>
           </th>
           <th style="min-width:15rem; background-color: white">
             <div class="flex align-items-center">
               Статус Email рассылки
-              <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+           <p-sortIcon field="sendStartDate"></p-sortIcon>
             </div>
           </th>
-          <th style="min-width:15rem; background-color: white">
+          <th pSortableColumn="sendStartDate" style="width:20%" style="min-width:15rem; background-color: white">
             <div class="flex align-items-center">
               Статус СМС рассылки
               <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>

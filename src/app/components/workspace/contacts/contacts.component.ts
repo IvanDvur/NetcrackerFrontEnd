@@ -16,6 +16,7 @@ import {HttpClient} from "@angular/common/http";
 export class ContactsComponent {
 
   mailingLists: MailingList[];
+  expanded: boolean = false;
 
   constructor(private contactsService: ContactsService,
               private config: PrimeNGConfig,
