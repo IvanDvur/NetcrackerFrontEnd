@@ -35,7 +35,7 @@ export class SidebarComponent implements OnInit {
           {
             label: 'Мои шаблоны',
             icon: 'pi pi-fw pi-table',
-            routerLink: "null"
+            routerLink: "/workspace/templates"
           }
         ]
       },

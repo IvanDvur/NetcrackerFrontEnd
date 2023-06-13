@@ -19,7 +19,8 @@ export class TranslationService {
         PROCESSED: 'В процессе рассылки',
         SENT: 'Доставлено',
         FATAL: 'Ошибка сервера',
-        EXPIRED: 'Отложено'
+        EXPIRED: 'Отложено',
+        NOT_SENT: 'Не отправлено'
       }
     }
   }

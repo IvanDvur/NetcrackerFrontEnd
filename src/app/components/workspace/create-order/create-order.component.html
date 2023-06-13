@@ -39,14 +39,6 @@
         </div>
         <div class="card text-center">
           <mat-tab-group>
-            <mat-tab (click)="resetEditor()" label="HTML Редактор">
-              <div id="unlayer-container">
-                <email-editor minHeight="650px"
-                              (loaded)="editorLoaded($event)"
-                              (ready)="editorReady($event)"
-                ></email-editor>
-              </div>
-            </mat-tab>
             <mat-tab label="Стандартные шаблоны">
             </mat-tab>
             <mat-tab label="Вставить HTML">
@@ -61,9 +53,6 @@
               </div>
             </mat-tab>
           </mat-tab-group>
-        </div>
-        <div class="box">
-          <p-button class="p-button-success" (click)="exportHtml()">Экспортировать</p-button>
         </div>
       </div>
     </mat-step>

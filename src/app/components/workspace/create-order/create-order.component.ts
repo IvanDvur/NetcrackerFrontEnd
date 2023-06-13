@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatStepper} from "@angular/material/stepper";
-import sampleTamplate from './src.json'
+import sampleTamplate from '../email-editor/src.json'
 import {EmailEditorComponent} from "../../../../../projects/email-editor/src/lib/email-editor.component";
 import {MailingList} from "../contacts/mailingList";
 import {ContactsService} from "../../../services/contacts/contacts.service";
@@ -12,10 +12,8 @@ import {Schedule} from "../../../services/order/schedule";
 import {Buffer} from "buffer";
 import moment from "moment";
 import {OrderService} from "../../../services/order/order.service";
-import {HttpClient} from "@angular/common/http";
-import {MessageService, PrimeNGConfig} from "primeng/api";
+import {MessageService} from "primeng/api";
 import {ImportService} from "../../../services/import/import.service";
-
 
 @Component({
   selector: 'app-create-order',
@@ -26,8 +24,7 @@ import {ImportService} from "../../../services/import/import.service";
 export class CreateOrderComponent implements OnInit {
 
   @ViewChild('singleStepper') s!: MatStepper;
-  @ViewChild(EmailEditorComponent)
-  private emailEditor: EmailEditorComponent
+
   orderForm: FormGroup;
   importForm: FormGroup
   sessionData: any = {}
@@ -86,23 +83,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
   // called when the editor is created
-  editorLoaded(event: any) {
-    console.log('editorLoaded');
-    this.emailEditor.editor.loadDesign(sampleTamplate);
-  }
 
-  // called when the editor has finished loading
-  editorReady(event: any) {
-    console.log('editorReady');
-  }
-
-  exportHtml() {
-    this.emailEditor.editor.exportHtml((data) => {
-        console.log('exportHtml', data)
-        this.orderForm.get('emailFormGroup').get('template').setValue(data.html)
-      }
-    );
-  }
 
   onChooseDate(event: Event) {
     this.selectDataVisible = true;
@@ -131,9 +112,6 @@ export class CreateOrderComponent implements OnInit {
 
   reloadCurrentPage() {
     window.location.reload();
-  }
-
-  resetEditor() {
   }
 
   onSubmit(value: any) {

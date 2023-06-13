@@ -3,6 +3,7 @@ import {Buffer} from "buffer";
 import {TranslationService} from "../../../services/translation/translation.service";
 
 export class OrderDTO{
+  id:string
   orderName:string
   template: string
   clientListName:string
@@ -11,7 +12,8 @@ export class OrderDTO{
   smsStatus:string
 
   constructor(order:FullOrderForm) {
-    const decodedHtml = Buffer.from(order.emailAdvertisement.template,'base64').toString('binary')
+    this.id = order.id
+    const decodedHtml = Buffer.from(order.emailAdvertisement.template,'base64').toString('UTF-8')
     this.orderName = order.orderName;
     this.template = decodedHtml;
     this.clientListName = order.mailingList.name

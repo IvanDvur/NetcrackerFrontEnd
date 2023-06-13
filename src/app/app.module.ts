@@ -19,7 +19,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {PanelMenuModule} from "primeng/panelmenu";
 import {ImportComponent} from './components/workspace/import/import.component';
 import {CreateOrderComponent} from './components/workspace/create-order/create-order.component';
-import {ContactsComponent} from "./components/workspace/contacts/contacts.component";
+import {MailingListComponent} from "./components/workspace/contacts/mailing-list.component";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {MatInputModule} from "@angular/material/input";
 import {MatDatepickerModule} from "@angular/material/datepicker";
@@ -63,6 +63,10 @@ import {ToolbarModule} from "primeng/toolbar";
 import {InputNumberModule} from "primeng/inputnumber";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {InputTextareaModule} from "primeng/inputtextarea";
+import { StatusPerClientComponent } from './components/workspace/status-per-client/status-per-client.component';
+import {TranslateModule} from "@ngx-translate/core";
+import { CustomEmailEditorComponent } from './components/workspace/email-editor/email-editor.component';
+import { UserTemplatesComponent } from './components/workspace/user-templates/user-templates.component';
 
 
 
@@ -74,7 +78,7 @@ import {InputTextareaModule} from "primeng/inputtextarea";
     SidebarComponent,
     ImportComponent,
     CreateOrderComponent,
-    ContactsComponent,
+    MailingListComponent,
     LoginComponent,
     HeaderComponent,
     RegistrationComponent,
@@ -83,6 +87,9 @@ import {InputTextareaModule} from "primeng/inputtextarea";
     SafeHtmlPipe,
     ImportWindowComponent,
     ContactComponent,
+    StatusPerClientComponent,
+    CustomEmailEditorComponent,
+    UserTemplatesComponent,
   ],
   imports: [
     BrowserModule,
@@ -135,6 +142,7 @@ import {InputTextareaModule} from "primeng/inputtextarea";
     InputNumberModule,
     ConfirmDialogModule,
     InputTextareaModule,
+    TranslateModule,
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

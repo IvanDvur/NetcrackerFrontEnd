@@ -23,5 +23,6 @@ export class OrderForm{
 }
 
 export class FullOrderForm extends OrderForm{
+  id:string
   mailingList: MailingList
 }

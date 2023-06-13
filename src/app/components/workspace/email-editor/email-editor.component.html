@@ -1,0 +1,9 @@
+<div class="container p-3.5">
+  <button (click)="exportHtml()" class="btn btn-success">Экспорт</button>
+  <div id="unlayer-container">
+    <email-editor minHeight="650px"
+                  (loaded)="editorLoaded($event)"
+                  (ready)="editorReady($event)"
+    ></email-editor>
+  </div>
+</div>

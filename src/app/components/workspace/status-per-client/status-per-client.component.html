@@ -1,0 +1,68 @@
+<div class="container pl-3.5">
+  <h1>Редактирование списка</h1>
+  <div class="container-contacts mt-5">
+    <p-toast></p-toast>
+    <p-toolbar styleClass="mb-4 gap-2">
+      <ng-template pTemplate="left">
+        <div class="mr-5">
+          <p-button routerLink="/workspace/contacts" icon="pi pi-arrow-left" styleClass="p-button-danger"></p-button>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="right">
+        <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import"
+                      class="mr-2 inline-block"></p-fileUpload>
+      </ng-template>
+    </p-toolbar>
+
+    <p-table
+      #dt
+      [value]="statusesPerClient"
+      [rows]="10"
+      [paginator]="true"
+      [globalFilterFields]="['email', 'country.name', 'representative.name', 'status']"
+      [tableStyle]="{ 'min-width': '75rem' }"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Отображается с {first} по {last} из {totalRecords} записей"
+      [showCurrentPageReport]="true"
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+          <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target, 'contains')"
+                           placeholder="Search..."/>
+                </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="email" style="min-width:15rem">Email
+            <p-sortIcon field="email"></p-sortIcon>
+          </th>
+          <th pSortableColumn="phone" style="min-width:15rem">Телефон
+            <p-sortIcon field="phone"></p-sortIcon>
+          </th>
+          <th pSortableColumn="statusEmail">Статус Email
+            <p-sortIcon field="statusEmail"></p-sortIcon>
+          </th>
+          <th pSortableColumn="statusSms">Статус SMS
+            <p-sortIcon field="statusSms"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-client>
+        <tr>
+          <td>{{ client.client.email }}</td>
+          <td>{{client.client.phoneNumber}}</td>
+          <td>{{ client.emailStatusPerClient}}</td>
+          <td>{{ client.smsStatusPerClient }}</td>
+          <td>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

@@ -13,7 +13,7 @@ import {HttpClient} from "@angular/common/http";
 })
 
 
-export class ContactsComponent {
+export class MailingListComponent {
 
   mailingLists: MailingList[];
   expanded: boolean = false;

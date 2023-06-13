@@ -82,7 +82,7 @@
               <p-button (click)="op.toggle($event)" icon="pi pi-image" label="Шаблон"></p-button>
             </div>
           </td>
-          <td>{{order.clientListName}}</td>
+          <td [routerLink]="['/workspace/active-orders',order.id]">{{order.clientListName}}</td>
           <td>{{order.sendStartDate}}</td>
           <td><p-tag [value] ='order.emailStatus' [style]="getSeverity(order.emailStatus)"></p-tag></td>
           <td><p-tag [value] ='order.smsStatus'  [style]="getSeverity(order.smsStatus)"></p-tag></td>
