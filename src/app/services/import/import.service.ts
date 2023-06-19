@@ -2,9 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpEvent, HttpHeaders, HttpRequest} from "@angular/common/http";
 import {MailingListForm} from "../../components/workspace/import/model/mailingListForm";
 import {Observable} from "rxjs";
-const httpOptions={
-  headers:new HttpHeaders({'Content-Type':'application/json'})
-};
+
+
 @Injectable({
   providedIn: 'root'
 })

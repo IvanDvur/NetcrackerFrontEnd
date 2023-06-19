@@ -15,6 +15,7 @@ import {ContactComponent} from "./components/workspace/contact/contact.component
 import {StatusPerClientComponent} from "./components/workspace/status-per-client/status-per-client.component";
 import {UserTemplatesComponent} from "./components/workspace/user-templates/user-templates.component";
 import {CustomEmailEditorComponent} from "./components/workspace/email-editor/email-editor.component";
+import {TemplateCard} from "./services/template/TemplateCard";
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -36,8 +37,8 @@ const routes: Routes = [
   },
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegistrationComponent},
-  {path: 'error', component: NotFoundComponent},
-  {path: '**', redirectTo: '/error'},
+  // {path: 'error', component: NotFoundComponent},
+  // {path: '**', redirectTo: '/error'},
 ];
 
 @NgModule({

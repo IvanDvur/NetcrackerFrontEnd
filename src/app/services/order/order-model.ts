@@ -4,7 +4,7 @@ import {Schedule} from "./schedule";
 import {MailingList} from "../../components/workspace/contacts/mailingList";
 
 export class OrderForm{
-  orderName:string
+  name:string
   emailAdvertisement: EmailAdvertisement
   smsAdvertisement: SmsAdvertisement
   mailingListId: string
@@ -13,7 +13,7 @@ export class OrderForm{
 
   constructor(orderName:string,emailAdvertisement: EmailAdvertisement, smsAdvertisement: SmsAdvertisement,
               mailingListId: string, sendTypes: string, schedule: Schedule[]) {
-    this.orderName=orderName
+    this.name=orderName
     this.emailAdvertisement = emailAdvertisement;
     this.smsAdvertisement = smsAdvertisement;
     this.mailingListId = mailingListId;

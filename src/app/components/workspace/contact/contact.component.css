@@ -13,7 +13,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-:host ::ng-deep .p-toast-top-right{
+:host ::ng-deep .p-toast-top-right {
   top: 100px
 }
 .card {
@@ -23,12 +23,12 @@ body {
   margin-bottom: 1rem;
 }
 
-h1{
+h1 {
   font-size: 32px;
   font-weight: bold;
 }
 
-.container-contacts{
+.container-contacts {
   padding: 15px;
   background-color: white;
   border-radius: 15px;

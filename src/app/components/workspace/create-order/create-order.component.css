@@ -19,7 +19,6 @@
   margin-bottom: 5%;
   margin-top: 5%;
 }
-
 .btn-step{
   display: flex;
   flex-direction: row;
@@ -29,17 +28,12 @@
   margin-top:10px;
   margin-bottom: 10px;
 }
-
 .topic{
   font-weight: bold;
   letter-spacing: 2px;
   font-weight: bold;
   font-size: 22px;
 }
-
-
-
-
 .top{
   margin-bottom: 1%;
   display: flex;
@@ -53,11 +47,17 @@
 
 :host ::ng-deep .mat-horizontal-content-container {
   padding:0 !important;
-  height: 900px;
+  height: 700px;
   position: relative;
   top:0px;
 }
 
 :host ::ng-deep .p-toast-top-right{
   top: 100px
+}
+.container-contacts{
+  padding: 15px;
+  background-color: white;
+  border-radius: 15px;
+  width: 100%;
 }

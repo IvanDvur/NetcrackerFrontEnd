@@ -4,7 +4,7 @@ import {TranslationService} from "../../../services/translation/translation.serv
 
 export class OrderDTO{
   id:string
-  orderName:string
+  name:string
   template: string
   clientListName:string
   sendStartDate: string
@@ -14,7 +14,7 @@ export class OrderDTO{
   constructor(order:FullOrderForm) {
     this.id = order.id
     const decodedHtml = Buffer.from(order.emailAdvertisement.template,'base64').toString('UTF-8')
-    this.orderName = order.orderName;
+    this.name = order.name;
     this.template = decodedHtml;
     this.clientListName = order.mailingList.name
     this.sendStartDate = order.schedule[0].timeToSend;

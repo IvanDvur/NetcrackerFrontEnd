@@ -14,17 +14,19 @@ import moment from "moment";
 import {OrderService} from "../../../services/order/order.service";
 import {MessageService} from "primeng/api";
 import {ImportService} from "../../../services/import/import.service";
+import {TemplateService} from "../../../services/template/template.service";
+import {TemplateCard} from "../../../services/template/TemplateCard";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
-  styleUrls: ['./create-order.component.css'],
+  styleUrls: ['./create-order.component.css', '/card-styles.scss'],
   providers: [MessageService]
 })
 export class CreateOrderComponent implements OnInit {
 
   @ViewChild('singleStepper') s!: MatStepper;
-
   orderForm: FormGroup;
   importForm: FormGroup
   sessionData: any = {}
@@ -39,12 +41,15 @@ export class CreateOrderComponent implements OnInit {
   private valid: boolean;
   mailingLists: MailingList[];
   visible: boolean;
+  userTemplates: TemplateCard[] = []
 
   constructor(private formBuilder: FormBuilder,
               private contactsService: ContactsService,
               private orderService: OrderService,
               private messageService: MessageService,
-              private importService: ImportService) {
+              private importService: ImportService,
+              private templateService: TemplateService,
+              private router: Router) {
   }
 
   showSuccess() {
@@ -65,6 +70,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fetchUserTemplates();
     this.minDate = moment(new Date()).add(10, 'm').toDate();
     this.fetchLists()
     this.orderForm = new FormGroup({
@@ -77,12 +83,13 @@ export class CreateOrderComponent implements OnInit {
       }),
       dateFormGroup: new FormGroup({
         schedule: new FormControl('', Validators.required),
-        clientListId: new FormControl('', Validators.required)
+        clientListId: new FormControl('', Validators.required),
+        name: new FormControl('', Validators.required)
       }),
     })
   }
 
-  // called when the editor is created
+// called when the editor is created
 
 
   onChooseDate(event: Event) {
@@ -118,6 +125,7 @@ export class CreateOrderComponent implements OnInit {
     const encodedTemplate = Buffer.from(value.emailFormGroup.template).toString('base64')
     const topic = value.emailFormGroup.topic
     const image = null
+    const name = value.dateFormGroup.name
     const textSms = value.smsFormGroup.textSms
     const mailingListId = value.dateFormGroup.clientListId
     let schedule;
@@ -134,7 +142,7 @@ export class CreateOrderComponent implements OnInit {
       sendTypes = sendTypes.concat("SMS,")
     }
     console.log(value);
-    this.orderRequest = new OrderForm('name',
+    this.orderRequest = new OrderForm(name,
       new EmailAdvertisement(encodedTemplate, topic, image),
       new SmsAdvertisement(textSms),
       mailingListId, sendTypes, [schedule])
@@ -142,12 +150,13 @@ export class CreateOrderComponent implements OnInit {
     this.orderService.postOrder(this.orderRequest).subscribe({
       next: res => {
         this.showSuccess()
-        this.ngOnInit()
+        this.router.navigate(['workspace/active-orders'])
       },
       error: err => {
         this.showError();
       }
     })
+
   }
 
   showDialog() {
@@ -162,5 +171,27 @@ export class CreateOrderComponent implements OnInit {
         this.showError()
       }
     })
+  }
+
+  fetchUserTemplates() {
+    this.templateService.fetchAllTemplatesByCustomer().subscribe({
+      next: res => {
+        res.forEach(x => {
+          this.userTemplates.push(new TemplateCard(x.id, x.jsonFile, x.htmlFile, x.image))
+        })
+      },
+      error: err => {
+        console.log('error')
+      }
+    })
+  }
+
+  selectTemplate(template: TemplateCard) {
+    this.orderForm.get('emailFormGroup').get('template').setValue(template.html)
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Шаблон выбран',
+      detail: 'Данный шаблон будет использоваться при рассылке'
+    });
   }
 }

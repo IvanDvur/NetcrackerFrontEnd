@@ -1,9 +1,12 @@
-<div class="container p-3.5">
-  <button (click)="exportHtml()" class="btn btn-success">Экспорт</button>
-  <div id="unlayer-container">
-    <email-editor minHeight="650px"
-                  (loaded)="editorLoaded($event)"
-                  (ready)="editorReady($event)"
-    ></email-editor>
+<div class="container p-1">
+  <div class="card">
+    <button *ngIf="exportButtonVisible" (click)="exportHtml()" class="btn btn-success">Сохранить шаблон</button>
+    <button *ngIf="updateButtonVisible" (click)="updateHtml()" class="btn btn-success">Обновить шаблон</button>
+    <div id="unlayer-container">
+      <email-editor minHeight="750px"
+                    (loaded)="editorLoaded($event)"
+                    (ready)="editorReady($event)"
+      ></email-editor>
+    </div>
   </div>
 </div>

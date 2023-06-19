@@ -1,5 +1,42 @@
 <div class="container p-3.5">
-  <button routerLink="/workspace/edit-template">+</button>
+  <div class="row row-cols-5">
+    <div class="col mb-5">
+      <div routerLink="/workspace/edit-template" class="card">
+        <img src="assets/new_template.png" style="object-fit:scale-down">
+        <div class="card-content align-content-between">
+          <h2 style="color:black">
+            Добавить шаблон
+          </h2>
+          <div class="container-buttons">
+            <div class="row">
+              <button class="btn btn-success" style="background-color: #064f95;">Создать новый</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col mb-5" *ngFor="let template of templates">
+      <div class="card">
+        <img [src]="'data:image/png;base64,'+ template.image" width="100%" height="100%" alt="Image"/>
+        <div class="card-content align-content-between">
+          <h2>
+            Card Heading
+          </h2>
+          <div class="container-buttons">
+            <div class="row">
+              <button routerLink="/workspace/edit-template" (click)="editEmail(template)" class="btn btn-success"
+                      style="background-color: #064f95;">
+                Редактировать
+              </button>
+            </div>
+            <div class="row">
+              <button class="btn btn-danger" (click)="deleteTemplate(template.id)">Удалить шаблон</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
