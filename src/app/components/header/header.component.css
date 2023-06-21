@@ -14,6 +14,19 @@
   font-weight: bold;
   color: white;
 }
+.profileButton{
+  color:white;
+  background-color:#00b894;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  font-weight: normal;
+}
+
+.logoutButton{
+  color:white;
+  background-color:#dc143c;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  font-weight: normal;
+}
 
 .auth-buttons button {
   flex-wrap: wrap;

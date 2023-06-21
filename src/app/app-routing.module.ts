@@ -15,7 +15,8 @@ import {ContactComponent} from "./components/workspace/contact/contact.component
 import {StatusPerClientComponent} from "./components/workspace/status-per-client/status-per-client.component";
 import {UserTemplatesComponent} from "./components/workspace/user-templates/user-templates.component";
 import {CustomEmailEditorComponent} from "./components/workspace/email-editor/email-editor.component";
-import {TemplateCard} from "./services/template/TemplateCard";
+import {BillingComponent} from "./components/workspace/billing/billing.component";
+
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -32,7 +33,8 @@ const routes: Routes = [
       {path: 'active-orders', component: ActiveOrdersComponent},
       {path: 'active-orders/:id',component: StatusPerClientComponent},
       {path: 'templates',component:UserTemplatesComponent},
-      {path:'edit-template',component:CustomEmailEditorComponent}
+      {path:'edit-template',component:CustomEmailEditorComponent},
+      {path: 'billing',component:BillingComponent}
     ]
   },
   {path: 'login', component: LoginComponent},

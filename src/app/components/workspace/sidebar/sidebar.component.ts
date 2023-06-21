@@ -40,27 +40,24 @@ export class SidebarComponent implements OnInit {
         ]
       },
       {
-        label: 'История',
+        label: 'Расслыки',
         icon: 'pi pi-fw pi-pencil',
         items: [
           {
-            label: 'Активные или запланированные рассылки',
+            label: 'Мои рассылки',
             icon: 'pi pi-fw pi-align-left',
             routerLink: '/workspace/active-orders'
-          },
-          {
-            label: 'Выполненные рассылки',
-            icon: 'pi pi-fw pi-align-right',
           },
         ]
       },
       {
-        label: 'Профиль',
+        label: 'Прочее',
         icon: 'pi pi-fw pi-user',
         items: [
           {
-            label: 'Редактировать',
-            icon: 'pi pi-fw pi-user-plus'
+            label: 'Выбрать тариф',
+            icon: 'pi pi-fw pi-user-plus',
+            routerLink: '/workspace/billing'
           },
         ]
       },

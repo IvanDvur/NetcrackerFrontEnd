@@ -68,6 +68,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import { CustomEmailEditorComponent } from './components/workspace/email-editor/email-editor.component';
 import { UserTemplatesComponent } from './components/workspace/user-templates/user-templates.component';
 import {CardModule} from "primeng/card";
+import { BillingComponent } from './components/workspace/billing/billing.component';
 
 
 
@@ -91,6 +92,7 @@ import {CardModule} from "primeng/card";
     StatusPerClientComponent,
     CustomEmailEditorComponent,
     UserTemplatesComponent,
+    BillingComponent,
   ],
     imports: [
         BrowserModule,

@@ -12,6 +12,7 @@ import {ActivatedRoute, Params} from "@angular/router";
   providers: [MessageService, ConfirmationService]
 })
 export class ContactComponent implements OnInit {
+
   constructor(private contactService: ContactsService,
               private messageService: MessageService,
               private confirmationService: ConfirmationService,

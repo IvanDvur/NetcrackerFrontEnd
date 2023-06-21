@@ -1,5 +1,12 @@
 $color-primary-white: rgb(240, 240, 240);
 
+.container-contacts {
+  padding: 15px;
+  background-color: white;
+  border-radius: 15px;
+  width: 100%;
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -74,7 +81,7 @@ main {
 
   &:hover img {
     transition: opacity .3s ease-in;
-    opacity: 1;
+    opacity: 0.5;
   }
 
 }

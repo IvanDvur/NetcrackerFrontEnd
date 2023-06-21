@@ -20,8 +20,11 @@ export class LoginComponent implements OnInit {
   checkoutForm: FormGroup;
   private loginInfo: AuthLoginInfo;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService,
-              private tokenStorage: TokenStorageService, private router: Router, private socialAuth: SocialAuthService) {
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthService,
+              private tokenStorage: TokenStorageService,
+              private router: Router,
+              private socialAuth: SocialAuthService) {
 
   }
 
@@ -30,7 +33,6 @@ export class LoginComponent implements OnInit {
     this.loginInfo = new AuthLoginInfo(
       this.checkoutForm.value.username || '',
       this.checkoutForm.value.password || '');
-
     this.authService.attempAuth(this.loginInfo).subscribe({
         next: data => {
           console.log(data.token)
@@ -57,26 +59,22 @@ export class LoginComponent implements OnInit {
     });
 
     this.socialAuth.authState.subscribe((user) => {
-
-      if(user!=null){
-      console.log("user = " +user)
-      this.socialUser = user
-
-      const tokenGoogle = new TokenDto(this.socialUser.idToken);
-      this.authService.google(tokenGoogle).subscribe(
-        res => {
-          console.log(res)
-          this.tokenStorage.saveToken(res.value)
-          this.router.navigate(['/workspace']);
-        }
-      )
+      if (user != null) {
+        console.log("user = " + user)
+        this.socialUser = user
+        const tokenGoogle = new TokenDto(this.socialUser.idToken);
+        this.authService.google(tokenGoogle).subscribe(
+          res => {
+            console.log(res)
+            this.tokenStorage.saveToken(res.value)
+            this.router.navigate(['/workspace']);
+          }
+        )
       }
     })
   }
 
   signInWithGoogle(): void {
-
-
     this.socialAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then(
       data => {
 
