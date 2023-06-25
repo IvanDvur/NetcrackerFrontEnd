@@ -4,7 +4,6 @@ import {AuthService} from "../../services/auth/auth.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthLoginInfo} from "../../services/auth/login-info";
 import {Router} from "@angular/router";
-import jwt_decode from "jwt-decode";
 import {GoogleLoginProvider, SocialAuthService, SocialUser} from "@abacritt/angularx-social-login";
 import {TokenDto} from "../../services/auth/token-dto";
 
@@ -14,6 +13,7 @@ import {TokenDto} from "../../services/auth/token-dto";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
   isBadCredentials = false
   socialUser: SocialUser;

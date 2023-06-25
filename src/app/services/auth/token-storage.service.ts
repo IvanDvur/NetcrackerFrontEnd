@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import jwt_decode, {JwtPayload} from "jwt-decode";
 
 const TOKEN_KEY='AuthToken'
 
@@ -15,9 +16,11 @@ export class TokenStorageService {
   }
 
   public saveToken(token:string){
+    let decodedJWT = JSON.parse(window.atob(token.split('.')[1]))
+    console.log(decodedJWT)
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY,token);
-
+    window.sessionStorage.setItem('role',decodedJWT.role)
   }
 
   public getToken():string|null{

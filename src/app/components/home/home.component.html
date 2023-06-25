@@ -1,6 +1,5 @@
 <main>
-  <div class="main-box">
-
+  <div class="main-box" [style]="getMainColor()">
     <div class="itembox">
       <div class="row">
         <div class="col-8">
@@ -11,11 +10,9 @@
           <img class="ml-24" src="../assets/png1.png" alt="Картинка">
         </div>
       </div>
-
-
     </div>
   </div>
-  <div class="main-bottom">
+  <div class="main-bottom" [style]="getMainColor()" >
     <a routerLink="/workspace">
       <button class="try-button">Попробовать</button>
     </a>

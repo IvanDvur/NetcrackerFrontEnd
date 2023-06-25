@@ -39,8 +39,8 @@ const routes: Routes = [
   },
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegistrationComponent},
-  // {path: 'error', component: NotFoundComponent},
-  // {path: '**', redirectTo: '/error'},
+  {path: 'error', component: NotFoundComponent},
+  {path: '**', redirectTo: '/error'},
 ];
 
 @NgModule({

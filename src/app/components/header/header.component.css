@@ -47,10 +47,23 @@
   top: 0;
   left: 0;
   right: 0;
+  background: linear-gradient(to right, #064f95, #007bff);
   align-items: center;
-  background-color: #064f95;
   padding: 20px;
   z-index: 9999;
   color: #000000;
+}
+
+
+.tariff-card-free {
+  background: linear-gradient(to right, #064f95, #007bff);
+
+}
+.tariff-card-plus {
+  background: linear-gradient(to right,#007bff , #9C27B0);
+
+}
+.tariff-card-premium {
+  background: linear-gradient(to right,#9C27B0, #FF9800 );
 }
 

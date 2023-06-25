@@ -5,12 +5,14 @@ import {TemplateService} from "../../../services/template/template.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TemplateCard} from "../../../services/template/TemplateCard";
 import {EditTemplateService} from "../../../services/template/edit-template.service";
-import {TemplateDTO} from "../../../services/template/TemplateDTO";
+import {MessageService} from "primeng/api";
+
 
 @Component({
   selector: 'app-email-editor',
   templateUrl: './email-editor.component.html',
-  styleUrls: ['./email-editor.component.css']
+  styleUrls: ['./email-editor.component.css'],
+  providers: [MessageService]
 })
 export class CustomEmailEditorComponent implements OnInit, OnDestroy {
 
@@ -23,7 +25,7 @@ export class CustomEmailEditorComponent implements OnInit, OnDestroy {
   private _isEditing = false
 
   constructor(private editTemplateService: EditTemplateService, private templateService: TemplateService,
-              private route: ActivatedRoute, private router: Router) {
+              private route: ActivatedRoute, private router: Router, private messageService: MessageService) {
   }
 
   editorLoaded(event: any) {
@@ -35,7 +37,6 @@ export class CustomEmailEditorComponent implements OnInit, OnDestroy {
     }
   }
 
-  // called when the editor has finished loading
   editorReady(event: any) {
     if (!this._isEditing) {
       this.exportButtonVisible = true;
@@ -45,17 +46,33 @@ export class CustomEmailEditorComponent implements OnInit, OnDestroy {
 
   exportHtml() {
     this.emailEditor.editor.exportHtml((data) => {
-        const {html, design} = data;
-        this.templateService.saveTemplate(html, JSON.stringify(design)).subscribe({
-          next: res => {
-            this.router.navigate(['/workspace/templates'])
-          },
-          error: err => {
+      const {html, design} = data;
+      this.templateService.saveTemplate(html, JSON.stringify(design)).subscribe({
+        next: res => {
+          this.router.navigate(['/workspace/templates'])
+        },
+        error: err => {
+          if (err && err.status) {
+            let status: number = err.status;
+            if (status == 403) {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Ошибка',
+                detail: 'Кол-во шаблонов превышает доступное по тарифу'
+              });
+              this.router.navigate(['/workspace/templates'])
+            } else if (status == 500) {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Ошибка',
+                detail: 'Не смогли обработать запрос. Попробуйте позже'
+              });
+              this.router.navigate(['/workspace/templates'])
+            }
           }
-        })
-        console.log('exportHtml', JSON.stringify(design), html);
-      }
-    );
+        }
+      })
+    });
   }
 
   updateHtml() {
@@ -73,10 +90,13 @@ export class CustomEmailEditorComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnInit(): void {
+  ngOnInit()
+    :
+    void {
     this._templateSource = this.editTemplateService._template;
     console.log(this._templateSource)
-    if (this._templateSource != null) {
+    if (this._templateSource != null
+    ) {
       this._isEditing = true;
       this.updateButtonVisible = true;
     }

@@ -4,10 +4,11 @@ import {TemplateCard} from "../../../services/template/TemplateCard";
 import {Router} from "@angular/router";
 import {EditTemplateService} from "../../../services/template/edit-template.service";
 
+
 @Component({
   selector: 'app-user-templates',
   templateUrl: './user-templates.component.html',
-  styleUrls: ['./user-templates.component.scss']
+  styleUrls: ['./user-templates.component.scss'],
 })
 export class UserTemplatesComponent implements OnInit {
 
@@ -33,7 +34,7 @@ export class UserTemplatesComponent implements OnInit {
 
   editEmail(template: TemplateCard) {
     this.editTemplateService._template = template;
-    this.router.navigate(['edit-template'])
+    this.router.navigate(['/workspace/edit-template'])
   }
 
   deleteTemplate(id: string) {

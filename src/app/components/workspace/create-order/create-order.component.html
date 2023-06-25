@@ -1,9 +1,6 @@
 <div class="container p-3.5">
-  <div class="top">
-    <label class="topic">Создать рассылку</label>
-    <button class="btn btn-danger" (click)="reloadCurrentPage()" *ngIf="isStarted">Другая
-      рассылка
-    </button>
+  <div>
+    <h1>Создать рассылку</h1>
   </div>
   <p-toast [baseZIndex]="1000000" position="top-right"></p-toast>
   <mat-radio-group *ngIf="!isStarted">
