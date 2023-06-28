@@ -9,8 +9,6 @@
         </div>
         <button pButton pRipple label="Добавить" icon="pi pi-plus" class="p-button-success mr-2"
                 (click)="openNew()"></button>
-        <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedClients()"
-                [disabled]="!selectedClients || !selectedClients.length"></button>
       </ng-template>
 
       <ng-template pTemplate="right">
@@ -24,7 +22,7 @@
       [value]="clients"
       [rows]="10"
       [paginator]="true"
-      [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+      [globalFilterFields]="['firstName', 'lastName', 'phoneNumber', 'email','properties']"
       [tableStyle]="{ 'min-width': '75rem' }"
       [(selection)]="selectedClients"
       [rowHover]="true"
@@ -37,28 +35,27 @@
           <h3 class="m-0">{{mailingListName}}</h3>
           <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="dt.filterGlobal($event.target, 'contains')"
-                           placeholder="Search..."/>
+                    <input pInputText type="text" (input)="dt.filterGlobal(applyFilterGlobal($event), 'contains')"
+                           placeholder="Поиск..."/>
                 </span>
         </div>
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th style="width: 4rem">
-            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          <th pSortableColumn="firstName" style="min-width:15rem">Имя клиента
+            <p-sortIcon field="firstName"></p-sortIcon>
           </th>
-          <th pSortableColumn="name" style="min-width:15rem">Имя клиента
-            <p-sortIcon field="name"></p-sortIcon>
+          <th pSortableColumn="lastName" style="min-width:15rem">Фамилия клиента
+            <p-sortIcon field="lastName"></p-sortIcon>
           </th>
-          <th pSortableColumn="name" style="min-width:15rem">Фамилия клиента
-            <p-sortIcon field="name"></p-sortIcon>
+          <th pSortableColumn="phoneNumber">Номер
+            <p-sortIcon field="phoneNumber"></p-sortIcon>
           </th>
-          <th>Номер</th>
-          <th pSortableColumn="price">Email
-            <p-sortIcon field="price"></p-sortIcon>
+          <th pSortableColumn="email">Email
+            <p-sortIcon field="email"></p-sortIcon>
           </th>
-          <th pSortableColumn="category" style="min-width:10rem">Параметры
-            <p-sortIcon field="category"></p-sortIcon>
+          <th pSortableColumn="properties" style="min-width:10rem">Параметры
+            <p-sortIcon field="properties"></p-sortIcon>
           </th>
           <th></th>
         </tr>
@@ -67,9 +64,6 @@
 
       <ng-template pTemplate="body" let-client>
         <tr>
-          <td>
-            <p-tableCheckbox [value]="client"></p-tableCheckbox>
-          </td>
           <td>{{ client.firstName }}</td>
           <td>{{client.lastName}}</td>
           <td>{{ client.phoneNumber }}</td>

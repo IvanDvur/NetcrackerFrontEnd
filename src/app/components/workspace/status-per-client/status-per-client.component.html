@@ -20,7 +20,7 @@
       [value]="statusesPerClient"
       [rows]="10"
       [paginator]="true"
-      [globalFilterFields]="['email', 'country.name', 'representative.name', 'status']"
+      [globalFilterFields]="['client.email', 'client.phoneNumber', 'emailStatusPerClient', 'smsStatusPerClient']"
       [tableStyle]="{ 'min-width': '75rem' }"
       [rowHover]="true"
       dataKey="id"
@@ -31,24 +31,22 @@
         <div class="flex align-items-center justify-content-between">
           <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="dt.filterGlobal($event.target, 'contains')"
-                           placeholder="Search..."/>
+                    <input pInputText type="text" (input)="dt.filterGlobal(applyFilterGlobal($event), 'contains')"
+                           placeholder="Поиск..."/>
                 </span>
         </div>
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="email" style="min-width:15rem">Email
-            <p-sortIcon field="email"></p-sortIcon>
+          <th pSortableColumn="client.email" style="min-width:15rem">Email
+            <p-sortIcon field="client.email"></p-sortIcon>
           </th>
-          <th pSortableColumn="phone" style="min-width:15rem">Телефон
-            <p-sortIcon field="phone"></p-sortIcon>
+          <th pSortableColumn="client.phoneNumber" style="min-width:15rem">Телефон
+            <p-sortIcon field="phoneNumber"></p-sortIcon>
           </th>
-          <th pSortableColumn="statusEmail">Статус Email
-            <p-sortIcon field="statusEmail"></p-sortIcon>
+          <th>Статус Email
           </th>
-          <th pSortableColumn="statusSms">Статус SMS
-            <p-sortIcon field="statusSms"></p-sortIcon>
+          <th>Статус SMS
           </th>
         </tr>
       </ng-template>
@@ -59,8 +57,6 @@
           <td>{{client.client.phoneNumber}}</td>
           <td>{{ client.emailStatusPerClient}}</td>
           <td>{{ client.smsStatusPerClient }}</td>
-          <td>
-          </td>
         </tr>
       </ng-template>
     </p-table>

@@ -36,4 +36,8 @@ export class StatusPerClientComponent implements OnInit {
       )
     })
   }
+
+  applyFilterGlobal(event: any) {
+    return event.target.value;
+  }
 }

@@ -16,11 +16,7 @@ export class ActiveOrdersComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.orderService.fetchActiveOrders().subscribe((data)=>{
-      data.forEach((order)=>this.activeOrders.push(new OrderDTO(order)))
-      console.log(data)
-    })
-    console.log(this.activeOrders)
+    this.fetchOrders();
   }
 
   applyFilterGlobal(event: any) {
@@ -29,6 +25,15 @@ export class ActiveOrdersComponent implements OnInit{
 
   clear(table: Table) {
     table.clear();
+  }
+
+  fetchOrders(){
+    this.orderService.fetchActiveOrders().subscribe((data)=>{
+      this.activeOrders = []
+      data.forEach((order)=>this.activeOrders.push(new OrderDTO(order)))
+      console.log(data)
+    })
+    console.log(this.activeOrders)
   }
 
   getSeverity(status: string):any {

@@ -4,7 +4,7 @@
     <button *ngIf="exportButtonVisible" (click)="exportHtml()" class="btn btn-success">Сохранить шаблон</button>
     <button *ngIf="updateButtonVisible" (click)="updateHtml()" class="btn btn-success">Обновить шаблон</button>
     <div id="unlayer-container">
-      <email-editor minHeight="750px"
+      <email-editor locale="ru-RU" minHeight="750px"
                     (loaded)="editorLoaded($event)"
                     (ready)="editorReady($event)"
       ></email-editor>

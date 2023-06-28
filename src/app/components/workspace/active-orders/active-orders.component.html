@@ -25,7 +25,7 @@
             </span>
           </div>
           <div>
-            <p-button icon="pi pi-refresh"></p-button>
+            <p-button (click)="fetchOrders()" icon="pi pi-refresh"></p-button>
           </div>
 
         </div>
@@ -55,16 +55,16 @@
               <p-sortIcon field="sendStartDate"></p-sortIcon>
             </div>
           </th>
-          <th style="min-width:15rem; background-color: white">
+          <th pSortableColumn="emailStatus" style="min-width:15rem; background-color: white">
             <div class="flex align-items-center">
               Статус Email рассылки
-           <p-sortIcon field="sendStartDate"></p-sortIcon>
+           <p-sortIcon field="emailStatus"></p-sortIcon>
             </div>
           </th>
-          <th pSortableColumn="sendStartDate" style="width:20%" style="min-width:15rem; background-color: white">
+          <th pSortableColumn="smsStatus" style="width:20%" style="min-width:15rem; background-color: white">
             <div class="flex align-items-center">
               Статус СМС рассылки
-              <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+              <p-sortIcon field="smsStatus"></p-sortIcon>
             </div>
           </th>
         </tr>
@@ -82,7 +82,9 @@
               <p-button (click)="op.toggle($event)" icon="pi pi-image" label="Шаблон"></p-button>
             </div>
           </td>
-          <td [routerLink]="['/workspace/active-orders',order.id]">{{order.clientListName}}</td>
+          <td>
+            <p-button styleClass="p-button-outlined p-button-help" [routerLink]="['/workspace/active-orders',order.id]">{{order.clientListName}}</p-button>
+          </td>
           <td>{{order.sendStartDate}}</td>
           <td><p-tag [value] ='order.emailStatus' [style]="getSeverity(order.emailStatus)"></p-tag></td>
           <td><p-tag [value] ='order.smsStatus'  [style]="getSeverity(order.smsStatus)"></p-tag></td>

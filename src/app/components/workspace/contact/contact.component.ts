@@ -124,7 +124,10 @@ export class ContactComponent implements OnInit {
         break;
       }
     }
-
     return index;
+  }
+
+  applyFilterGlobal(event: any) {
+    return event.target.value;
   }
 }
