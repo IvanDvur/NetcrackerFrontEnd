@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import {TokenDto} from "../auth/token-dto";
 
 
-const changeTariffURL = 'http://data-service:8080/tariff/change'
+const changeTariffURL = 'http://localhost:8080/tariff/change'
 @Injectable({
   providedIn: 'root'
 })

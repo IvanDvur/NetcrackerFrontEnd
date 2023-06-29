@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class ContactsService {
 
-  private baseUrl = 'http://data-service:8080'
+  private baseUrl = 'http://localhost:8080'
 
   constructor(private http:HttpClient) {
 

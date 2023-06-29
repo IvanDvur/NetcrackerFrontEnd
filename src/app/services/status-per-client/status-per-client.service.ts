@@ -12,7 +12,7 @@ const httpOptions={
 })
 export class StatusPerClientService {
 
-  private getClientsStatusesByOrderIdURL = "http://data-service:8080/statusPerClient/"
+  private getClientsStatusesByOrderIdURL = "http://localhost:8080/statusPerClient/"
 
   constructor(private http:HttpClient) { }
 
