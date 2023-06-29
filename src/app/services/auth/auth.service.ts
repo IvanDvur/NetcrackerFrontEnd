@@ -14,8 +14,8 @@ const httpOptions={
 })
 export class AuthService {
 
-  private loginUrl= 'http://localhost:8080/auth/sign-in'
-  oauthURL = 'http://localhost:8080/oauth/';
+  private loginUrl= 'http://data-service:8080/auth/sign-in'
+  oauthURL = 'http://data-service:8080/oauth/';
 
   constructor(private  http:HttpClient) { }
 

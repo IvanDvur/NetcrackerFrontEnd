@@ -11,7 +11,7 @@ const httpOptions={
 @Injectable({providedIn: 'root'})
 export class RegistrationService {
 
-  private registgrationURL = "http://localhost:8080/auth/register";
+  private registgrationURL = "http://data-service:8080/auth/register";
 
   attempAuth(credentials:RegisterInfo):Observable<JwtResponse>{
     return this.http.post<JwtResponse>(this.registgrationURL,credentials,httpOptions);

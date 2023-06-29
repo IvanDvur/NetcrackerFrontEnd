@@ -17,8 +17,8 @@ const httpOptions = {
 })
 export class OrderService {
 
-  private postOrderURL = 'http://localhost:8080/order/add'
-  private activeOrdersURL = 'http://localhost:8080/order/active'
+  private postOrderURL = 'http://data-service:8080/order/add'
+  private activeOrdersURL = 'http://data-service:8080/order/active'
 
   constructor(private http: HttpClient) {
 

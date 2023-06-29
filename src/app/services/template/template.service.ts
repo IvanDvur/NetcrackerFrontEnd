@@ -9,11 +9,11 @@ import {Observable} from "rxjs";
 })
 export class TemplateService {
 
-  private fetchAllTemplatesURL = "http://localhost:8080/template/findAll"
-  private fetchTemplateURL = "http://localhost:8080/template/get"
-  private saveTemplateURL = "http://localhost:8080/template/save"
-  private updateTemplateURL = "http://localhost:8080/template/update"
-  private deleteTemplateURL = "http://localhost:8080/template/delete"
+  private fetchAllTemplatesURL = "http://data-service:8080/template/findAll"
+  private fetchTemplateURL = "http://data-service:8080/template/get"
+  private saveTemplateURL = "http://data-service:8080/template/save"
+  private updateTemplateURL = "http://data-service:8080/template/update"
+  private deleteTemplateURL = "http://data-service:8080/template/delete"
 
 
   constructor(private http: HttpClient) {
