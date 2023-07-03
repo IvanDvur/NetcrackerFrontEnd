@@ -1,9 +1,10 @@
 <div class="container p-3.5">
   <h1>Мои шаблоны</h1>
+  <p-toast [baseZIndex]="1000000"  position="top-right"></p-toast>
   <div class="container-contacts">
     <div class="row row-cols-5">
       <div class="col mb-5">
-        <div routerLink="/workspace/edit-template" class="card">
+        <div (click)="showError()" class="card">
           <img src="assets/new_template.png" style="object-fit:scale-down">
           <div class="card-content align-content-between">
             <h2 style="color:black">
@@ -11,7 +12,7 @@
             </h2>
             <div class="container-buttons">
               <div class="row">
-                <button class="btn btn-success" style="background-color: #064f95;">Создать новый</button>
+                <button routerLink="/workspace/edit-template"  [class]="'btn  ' + (!canAddTemplateButtonDisabled ? 'disabled btn-danger' : 'btn-success')">Создать новый</button>
               </div>
             </div>
           </div>
@@ -21,9 +22,6 @@
         <div class="card">
           <img [src]="'data:image/png;base64,'+ template.image" width="100%" height="100%" alt="Image"/>
           <div class="card-content align-content-between">
-            <h2>
-              Card Heading
-            </h2>
             <div class="container-buttons">
               <div class="row">
                 <button routerLink="/workspace/edit-template" (click)="editEmail(template)" class="btn btn-success"

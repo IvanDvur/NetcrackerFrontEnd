@@ -1,8 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatStepper} from "@angular/material/stepper";
-import sampleTamplate from '../email-editor/src.json'
-import {EmailEditorComponent} from "../../../../../projects/email-editor/src/lib/email-editor.component";
 import {MailingList} from "../contacts/mailingList";
 import {ContactsService} from "../../../services/contacts/contacts.service";
 import {OrderForm} from "../../../services/order/order-model";
@@ -27,18 +25,18 @@ import {Router} from "@angular/router";
 export class CreateOrderComponent implements OnInit {
 
   @ViewChild('singleStepper') s!: MatStepper;
-  orderForm: FormGroup;
+  orderForm: FormGroup
   importForm: FormGroup
   sessionData: any = {}
   orderRequest: OrderForm;
   selectDataVisible: boolean;
-  private text!: string;
+  currentDate: Date = new Date();
+  sendingDate = moment(this.currentDate).add(1, 'minute').format("DD-MM-YYYY HH:mm");
+  private timer:any;
   minDate: Date;
   isStarted: boolean = false;
   emailStepperV: boolean = false;
   smsStepperV: boolean = false;
-  private chooseDate: any;
-  private valid: boolean;
   mailingLists: MailingList[];
   visible: boolean;
   userTemplates: TemplateCard[] = []
@@ -70,6 +68,11 @@ export class CreateOrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.timer = setInterval(() => {
+      this.currentDate = new Date();
+      this.sendingDate = moment(this.currentDate).add(1, 'minute').format("DD-MM-YYYY HH:mm");
+    }, 60000);
+
     this.fetchUserTemplates();
     this.minDate = moment(new Date()).add(10, 'm').toDate();
     this.fetchLists()
@@ -89,9 +92,6 @@ export class CreateOrderComponent implements OnInit {
     })
   }
 
-// called when the editor is created
-
-
   onChooseDate(event: Event) {
     this.selectDataVisible = true;
     this.orderForm.get('dateFormGroup').get('schedule').setValidators(Validators.required)
@@ -100,6 +100,7 @@ export class CreateOrderComponent implements OnInit {
 
   onStartImme(event: Event) {
     this.selectDataVisible = false;
+
     console.log(this.orderForm.get('dateFormGroup'))
     this.orderForm.get('dateFormGroup').get('schedule').clearValidators()
     this.orderForm.get('dateFormGroup').get('schedule').updateValueAndValidity()

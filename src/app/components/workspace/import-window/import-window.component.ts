@@ -17,6 +17,7 @@ export class ImportWindowComponent {
   public readonly myFormGroup: FormGroup;
   private selectedFiles?: FileList;
   private currentFile?: File;
+  private acceptableTypes: string[] = ['text/csv','text/xls','text/xlsx']
 
   constructor(private service: ImportService,
               private readonly formBuilder: FormBuilder,
@@ -37,15 +38,15 @@ export class ImportWindowComponent {
     });
   }
 
-  showError() {
-    this.messageService.add({severity: 'error', summary: 'Ошибка', detail: 'Заполните все поля'});
+  showError(message:string) {
+    this.messageService.add({severity: 'error', summary: 'Ошибка', detail: message});
   }
 
-  showServerError() {
+  showServerError(message: string) {
     this.messageService.add({
       severity: 'error',
-      summary: 'Ошибка сервера',
-      detail: 'Упс! Не смогли добавить ваш список. Попробуйте позже'
+      summary: 'Ошибка',
+      detail: message == null ? "Упс! Не смогли добавить ваш список. Попробуйте позже" : message
     });
   }
 
@@ -58,13 +59,18 @@ export class ImportWindowComponent {
   }
 
   public onClickSubmit(): void {
+    console.log(this.selectedFiles?.item(0).type)
     if (this.myFormGroup.invalid || this.selectedFiles?.item(0) == null) {
-      this.showError()
+      this.showError("Заполните все поля")
       return;
     }
+    if(!this.acceptableTypes.includes(this.selectedFiles?.item(0).type)){
+      this.showError("Некорректный формат файла");
+      return;
+    }
+
     this.currentFile = this.selectedFiles.item(0)
     if (this.currentFile) {
-      // this.currentFile = file;
       this.csvValidationService.validateCSV(this.currentFile)
         .then(isValid => {
           if (isValid) {
@@ -89,7 +95,8 @@ export class ImportWindowComponent {
           this.myFormGroup.get('file').setValue('');
         },
         error: err => {
-          this.showServerError()
+          console.log(err)
+          this.showServerError(err.error)
         }
       });
   }

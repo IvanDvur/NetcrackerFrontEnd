@@ -38,10 +38,8 @@
           </div>
           <div class="card text-center">
             <mat-tab-group>
-              <mat-tab label="Стандартные шаблоны">
-              </mat-tab>
               <mat-tab label="Вставить HTML">
-                <mat-form-field class="p-4 w-100" style="height: 650px">
+                <mat-form-field class="p-4 w-100" style="height: 600px">
                   <mat-label>Вставьте HTML-код страницы</mat-label>
                   <input class="textarea" matInput placeholder="Например, <div>Hello World!<div>"
                          formControlName="template" required>
@@ -49,6 +47,7 @@
               </mat-tab>
               <mat-tab label="Мои шаблоны">
                 <div class="container p-2.5" style="max-height: 600px">
+                  <button routerLink="/workspace/templates" class="btn btn-success p-2 mt-5 mb-5 w-100">Создать свой шаблон</button>
                   <div class="row row-cols-5">
                     <div class="col mb-5" *ngFor="let template of userTemplates">
                       <div class="card-template">
@@ -168,7 +167,8 @@
               <div>
                 <h2>Общая информация</h2>
                 <h3>Название: {{orderForm.value.dateFormGroup.name}}</h3>
-                <h3>Дата начала отправки: {{orderForm.value.dateFormGroup.schedule}}</h3>
+                <h3 *ngIf="selectDataVisible==false">Дата начала отправки: {{sendingDate}}</h3>
+                <h3 *ngIf="selectDataVisible">Дата начала отправки: {{orderForm.value.dateFormGroup.schedule}}</h3>
               </div>
               <hr>
               <div *ngIf="emailStepperV">
