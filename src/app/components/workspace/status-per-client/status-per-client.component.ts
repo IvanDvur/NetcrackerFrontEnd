@@ -40,4 +40,15 @@ export class StatusPerClientComponent implements OnInit {
   applyFilterGlobal(event: any) {
     return event.target.value;
   }
+
+  getSeverity(status: string):any {
+    switch (status) {
+      case 'Доставлено':
+        return {'background':'green'};
+      case 'Не отправлено':
+        return {'background':'red'};
+      case '-':
+        return {'background':'grey'}
+    }
+  }
 }
