@@ -55,8 +55,8 @@
         <tr>
           <td>{{ client.client.email }}</td>
           <td>{{client.client.phoneNumber}}</td>
-          <td>{{ client.emailStatusPerClient}}</td>
-          <td>{{ client.smsStatusPerClient }}</td>
+          <td><p-tag [value] ='client.emailStatusPerClient' [style]="getSeverity(client.emailStatusPerClient)"></p-tag></td>
+          <td><p-tag [value] ='client.smsStatusPerClient' [style]="getSeverity(client.smsStatusPerClient)"></p-tag></td>
         </tr>
       </ng-template>
     </p-table>
